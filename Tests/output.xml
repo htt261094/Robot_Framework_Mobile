@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-07-18T00:11:39.707089" rpa="false" schemaversion="5">
+<suite id="s1" name="Login" source="C:\Users\tuant\Desktop\RobotFramework_Example\Tests\Login.robot">
+<test id="s1-t1" name="Open app and verify app opened" line="10">
+<kw name="Open Application from simulator" owner="hooks">
+<kw name="Open Application" owner="AppiumLibrary">
+<arg>${remote_url}</arg>
+<arg>automationName=${automationName}</arg>
+<arg>platformName=${platformName}</arg>
+<arg>platformVersion=${platformVersion}</arg>
+<arg>deviceName=${deviceName}</arg>
+<arg>appPackage=${appPackage}</arg>
+<arg>appActivity=${appActivity}</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://appium.io/docs/en/2.1/cli/args/
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" start="2025-07-18T00:11:39.849846" elapsed="4.667663"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:39.849245" elapsed="4.668387"/>
+</kw>
+<kw name="Verify App is opened" owner="HomeScreen">
+<kw name="Element Should Be Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:45.811809" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]</msg>
+<arg>${AppTitle}</arg>
+<doc>Verifies that element identified with locator is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:44.518176" elapsed="1.293716"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:44.517917" elapsed="1.294052"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:39.848492" elapsed="5.963703"/>
+</test>
+<test id="s1-t2" name="Login to app" line="14">
+<kw name="Open left menu and tap Login" owner="HomeScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:45.813830" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView'.</msg>
+<msg time="2025-07-18T00:11:45.979013" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView</msg>
+<arg>${LeftMenu}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:45.813061" elapsed="0.166024"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:47.485921" level="INFO">xpath criteria: //android.widget.TextView[@text="Log In"]</msg>
+<arg>${Login}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:45.979204" elapsed="1.506799"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:47.487435" level="INFO">Clicking element '//android.widget.TextView[@text="Log In"]'.</msg>
+<msg time="2025-07-18T00:11:47.666811" level="INFO">xpath criteria: //android.widget.TextView[@text="Log In"]</msg>
+<arg>${Login}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:47.486134" elapsed="0.180733"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:49.157764" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Username input field"]
+xpath criteria: //android.widget.EditText[@content-desc="Username input field"]</msg>
+<arg>${UserName_txtBox}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:47.666965" elapsed="1.490878"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:45.812906" elapsed="3.345013"/>
+</kw>
+<kw name="Input Username to textbox" owner="HomeScreen">
+<kw name="Input Text" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:49.159240" level="INFO">Typing text 'bob@example.com' into text field '//android.widget.EditText[@content-desc="Username input field"]'</msg>
+<msg time="2025-07-18T00:11:49.230585" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Username input field"]</msg>
+<arg>${UserName_txtBox}</arg>
+<arg>bob@example.com</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:49.158415" elapsed="0.072238"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:49.158214" elapsed="0.072511"/>
+</kw>
+<kw name="Input Password to textbox" owner="HomeScreen">
+<kw name="Input Password" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:49.232144" level="INFO">Typing password into text field '//android.widget.EditText[@content-desc="Password input field"]'</msg>
+<msg time="2025-07-18T00:11:49.880625" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Password input field"]</msg>
+<arg>${Password_txtBox}</arg>
+<arg>10203040</arg>
+<doc>Types the given password into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:49.231204" elapsed="0.649473"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:49.230969" elapsed="0.649758"/>
+</kw>
+<kw name="Tap Login Button" owner="HomeScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:49.881894" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="Login button"]'.</msg>
+<msg time="2025-07-18T00:11:50.541655" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="Login button"]</msg>
+<arg>${Login_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:49.881139" elapsed="0.660578"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:49.880944" elapsed="0.660823"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:45.812634" elapsed="4.729311"/>
+</test>
+<test id="s1-t3" name="Add product to cart" line="20">
+<kw name="Go to SauceLabs Packback detail screen" owner="HomeScreen">
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:51.301706" level="INFO">xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView
+xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView</msg>
+<arg>xpath=${SauceLabsBackpack}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:50.542743" elapsed="0.759017"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:51.302653" level="INFO">Clicking element 'xpath=(//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView'.</msg>
+<msg time="2025-07-18T00:11:51.447121" level="INFO">xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView</msg>
+<arg>xpath=${SauceLabsBackpack}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:51.301852" elapsed="0.145335"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:50.542548" elapsed="0.904699"/>
+</kw>
+<kw name="Add item to cart" owner="ItemDetail">
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:52.450648" level="INFO">xpath criteria: //android.widget.TextView[@text="Add To Cart"]
+xpath criteria: //android.widget.TextView[@text="Add To Cart"]</msg>
+<arg>${AddToCart_btn}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:51.447762" elapsed="1.002941"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:52.451734" level="INFO">Clicking element '//android.widget.TextView[@text="Add To Cart"]'.</msg>
+<msg time="2025-07-18T00:11:52.579582" level="INFO">xpath criteria: //android.widget.TextView[@text="Add To Cart"]</msg>
+<arg>${AddToCart_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:52.450912" elapsed="0.128730"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:51.447507" elapsed="1.132194"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:50.542232" elapsed="2.037673"/>
+</test>
+<test id="s1-t4" name="Verify product is added to cart" line="24">
+<kw name="Click on cart" owner="CommonAction">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:52.581731" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="cart badge"]/android.widget.ImageView'.</msg>
+<msg time="2025-07-18T00:11:53.359876" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="cart badge"]/android.widget.ImageView</msg>
+<arg>${CartIcon}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-07-18T00:11:52.580720" elapsed="0.779233"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:52.580532" elapsed="0.779498"/>
+</kw>
+<kw name="Verify Items added to cart" owner="CartScreen">
+<kw name="Element Text Should Be" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:53.361419" level="INFO">Verifying element '//android.widget.TextView[@content-desc="product label"]' contains exactly text 'Sauce Labs Backpack'.</msg>
+<msg time="2025-07-18T00:11:53.984227" level="INFO">xpath criteria: //android.widget.TextView[@content-desc="product label"]</msg>
+<arg>${ProductName}</arg>
+<arg>Sauce Labs Backpack</arg>
+<doc>Verifies element identified by ``locator`` exactly contains text ``expected``.</doc>
+<status status="PASS" start="2025-07-18T00:11:53.360642" elapsed="0.623640"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:53.360431" elapsed="0.623902"/>
+</kw>
+<kw name="Verify Checkout button is Visible" owner="CartScreen">
+<kw name="Element Should Be Visible" owner="AppiumLibrary">
+<msg time="2025-07-18T00:11:54.045763" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="Proceed To Checkout button"]</msg>
+<arg>${Checkout_btn}</arg>
+<doc>Verifies that element identified with locator is visible.</doc>
+<status status="PASS" start="2025-07-18T00:11:53.984762" elapsed="0.061054"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:53.984555" elapsed="0.061311"/>
+</kw>
+<status status="PASS" start="2025-07-18T00:11:52.580174" elapsed="1.465853"/>
+</test>
+<status status="PASS" start="2025-07-18T00:11:39.708014" elapsed="14.338522"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Login" id="s1" pass="4" fail="0" skip="0">Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
