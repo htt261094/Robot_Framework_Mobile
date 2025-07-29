@@ -2,6 +2,7 @@
 Library    AppiumLibrary
 Variables    ../Locators/HomepageLocators.py
 Variables    ../Locators/CommonElements.py
+Variables    ../TestData/TestData.py
 Resource    ../KeywordDefinationFiles/CartScreen.robot
 
 *** Keywords ***
@@ -14,10 +15,10 @@ Open left menu and tap Login
     Click Element    ${Login}
     Wait Until Element Is Visible    ${UserName_txtBox}
 Input Username to textbox
-    Input Text    ${UserName_txtBox}    bob@example.com
+    Input Text    ${UserName_txtBox}    ${Username}
 
 Input Password to textbox
-    Input Password    ${Password_txtBox}    10203040
+    Input Password    ${Password_txtBox}    ${Password}
 
 Tap Login Button
     Click Element    ${Login_btn}
