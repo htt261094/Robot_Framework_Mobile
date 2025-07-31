@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-07-17T23:15:41.053053" rpa="false" schemaversion="5">
-<suite id="s1" name="Login" source="c:\Users\tuant\Desktop\RobotFramework_Example\Tests\Login.robot">
-<test id="s1-t1" name="Open app and verify app opened" line="8">
-<kw name="Open Application from simulator" owner="hooks">
+<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-01T02:26:50.584136" rpa="false" schemaversion="5">
+<suite id="s1" name="Add Item To Cart" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/iOS/Add_Item_To_Cart.robot">
+<test id="s1-t1" name="Open app and verify app opened" line="10">
+<kw name="Open iOS simulator" owner="hooks">
 <kw name="Open Application" owner="AppiumLibrary">
-<arg>${remote_url}</arg>
-<arg>automationName=${automationName}</arg>
-<arg>platformName=${platformName}</arg>
-<arg>platformVersion=${platformVersion}</arg>
-<arg>deviceName=${deviceName}</arg>
-<arg>appPackage=${appPackage}</arg>
-<arg>appActivity=${appActivity}</arg>
+<arg>${iOS_remote_url}</arg>
+<arg>automationName=${iOS_automationName}</arg>
+<arg>platformName=${iOS_platformName}</arg>
+<arg>deviceName=${iOS_deviceName}</arg>
+<arg>platformVersion=${iOS_platformVersion}</arg>
+<arg>udid=${iOS_udid}</arg>
+<arg>app=${iOS_app}</arg>
 <doc>Opens a new application to given Appium server.
 Capabilities of appium server, Android and iOS,
-Please check https://appium.io/docs/en/2.1/cli/args/
+Please check https://appium.io/docs/en/2.19/guides/caps/
 | *Option*            | *Man.* | *Description*     |
 | remote_url          | Yes    | Appium server url |
-| alias               | no     | alias             |
-| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
-<status status="PASS" start="2025-07-17T23:15:41.201566" elapsed="5.897662"/>
+| alias               | No     | alias             |</doc>
+<status status="PASS" start="2025-08-01T02:26:50.678021" elapsed="12.631379"/>
 </kw>
-<status status="PASS" start="2025-07-17T23:15:41.201080" elapsed="5.898388"/>
+<status status="PASS" start="2025-08-01T02:26:50.677564" elapsed="12.632413"/>
 </kw>
-<kw name="Verify App is opened" owner="HomeScreen">
-<kw name="Element Should Be Visible" owner="AppiumLibrary">
-<msg time="2025-07-17T23:15:48.405618" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]</msg>
-<arg>${AppTitle}</arg>
-<doc>Verifies that element identified with locator is visible.</doc>
-<status status="PASS" start="2025-07-17T23:15:47.100596" elapsed="1.306126"/>
-</kw>
-<status status="PASS" start="2025-07-17T23:15:47.100157" elapsed="1.306684"/>
-</kw>
-<status status="PASS" start="2025-07-17T23:15:41.200459" elapsed="7.206651"/>
+<status status="PASS" start="2025-08-01T02:26:50.676867" elapsed="12.633624"/>
 </test>
-<status status="PASS" start="2025-07-17T23:15:41.055970" elapsed="7.351656"/>
+<status status="PASS" start="2025-08-01T02:26:50.587609" elapsed="12.723921"/>
 </suite>
 <statistics>
 <total>
@@ -42,7 +32,7 @@ Please check https://appium.io/docs/en/2.1/cli/args/
 <tag>
 </tag>
 <suite>
-<stat name="Login" id="s1" pass="1" fail="0" skip="0">Login</stat>
+<stat name="Add Item To Cart" id="s1" pass="1" fail="0" skip="0">Add Item To Cart</stat>
 </suite>
 </statistics>
 <errors>

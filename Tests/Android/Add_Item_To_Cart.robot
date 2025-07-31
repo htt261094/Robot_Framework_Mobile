@@ -1,9 +1,9 @@
 *** Settings ***
 Library    AppiumLibrary
-Resource    ../Resources/PageObject/hooks.robot
-Resource    ../Resources/PageObject/KeywordDefinationFiles/HomeScreen.robot
-Resource    ../Resources/PageObject/KeywordDefinationFiles/CommonAction.robot
-Resource    ../Resources/PageObject/KeywordDefinationFiles/ItemDetail.robot
+Resource    ../../Resources/hooksAndCommonAction/hooks.robot
+Resource    ../../Resources/PageObject/KeywordDefinationFiles/HomeScreen.robot
+Resource    ../../Resources/PageObject/KeywordDefinationFiles/CommonAction.robot
+Resource    ../../Resources/PageObject/KeywordDefinationFiles/ItemDetail.robot
 
 
 *** Test Cases ***

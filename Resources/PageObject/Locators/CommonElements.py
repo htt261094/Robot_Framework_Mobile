@@ -8,3 +8,5 @@ Login_btn = "//android.view.ViewGroup[@content-desc=\"Login button\"]"
 #Items detail screen
 AddToCart_btn = "//android.widget.TextView[@text=\"Add To Cart\"]"
 CartIcon = "//android.view.ViewGroup[@content-desc=\"cart badge\"]/android.widget.ImageView"
+
+#iOS
