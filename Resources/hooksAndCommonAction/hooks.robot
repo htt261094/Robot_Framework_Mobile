@@ -3,7 +3,7 @@ Library    AppiumLibrary
 Variables    ../PageObject/TestData/TestData.py
 
 *** Keywords ***
-Open Application from simulator
+Open Android simulator
     Open Application    ${Android_remote_url}    automationName=${Android_automationName}    platformName=${Android_platformName}    platformVersion=${Android_platformVersion}  deviceName=${Android_deviceName}  appPackage=${Android_appPackage}   appActivity=${Android_appActivity}
 
 Close Application
