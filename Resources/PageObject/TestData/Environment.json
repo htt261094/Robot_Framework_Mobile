@@ -8,15 +8,15 @@
         "appPackage": "com.saucelabs.mydemoapp.rn",
         "appActivity": "com.saucelabs.mydemoapp.rn.MainActivity"
     },
-    "iOS": {
+    "iOS_Emulator": {
         "remote_url": "http://127.0.0.1:4723",
         "automationName": "XCUITest",
         "platformName": "iOS",
-        "deviceName": "iPhone 16 plus",
-        "udid": "46B3565E-A8D2-42AE-B6BA-BADC1B0841E4",
-        "platformVersion": "18.6",
+        "deviceName": "iPhone 15 Pro Max",
+        "udid": "966C13C0-0DB0-4E8C-BE0E-24270641BD45",
+        "platformVersion": "17.5",
         "app": "com.phillip.tdt.poems.phk.uat",
-        "noReset": "true",
+        "noReset": "false",
         "useNewWDA": "true"
     }
 }

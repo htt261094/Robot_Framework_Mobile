@@ -1,17 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-03T15:44:50.312879" rpa="false" schemaversion="5">
-<suite id="s1" name="Login" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/Android/Login.robot">
+<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-03T22:51:11.566607" rpa="false" schemaversion="5">
+<suite id="s1" name="Login" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/iOS/Login.robot">
 <test id="s1-t1" name="Open app and verify app opened" line="8">
-<kw name="Open Android simulator" owner="hooks">
+<kw name="Load Login Credentials" owner="LoginScreen">
+<kw name="Get Account Credentials" owner="ReadJsonFile">
 <kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2025-08-03T15:44:50.433946" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;' exists.</msg>
-<arg>${jsonFile}</arg>
+<msg time="2025-08-03T22:51:11.700977" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json&lt;/a&gt;' exists.</msg>
+<arg>${AccountList}</arg>
 <doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.433753" elapsed="0.000697"/>
+<status status="PASS" start="2025-08-03T22:51:11.700803" elapsed="0.001645"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2025-08-03T15:44:50.435348" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;'.</msg>
-<msg time="2025-08-03T15:44:50.436023" level="INFO">${json_text} = {
+<msg time="2025-08-03T22:51:11.703896" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json&lt;/a&gt;'.</msg>
+<msg time="2025-08-03T22:51:11.704264" level="INFO">${json_text} = {
+    "HK": {
+        "Register_Account": [
+            {
+                "0000055": {
+                    "phoneNumber": "0000055",
+                    "password": "Phillip1"
+                }
+      ...</msg>
+<var>${json_text}</var>
+<arg>${AccountList}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.702704" elapsed="0.001626"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-03T22:51:11.704677" level="INFO">${account_json} = {'HK': {'Register_Account': [{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}], 'Account_Holder': []}}</msg>
+<var>${account_json}</var>
+<arg>json.loads('''${json_text}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.704462" elapsed="0.000265"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.705097" level="INFO">${accounts} = [{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}]</msg>
+<var>${accounts}</var>
+<arg>${account_json['HK']}</arg>
+<arg>Register_Account</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.704803" elapsed="0.000336"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.705480" elapsed="0.000088"/>
+</kw>
+<msg time="2025-08-03T22:51:11.705620" level="INFO">${has_key} = True</msg>
+<var>${has_key}</var>
+<arg>Dictionary Should Contain Key</arg>
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.705389" elapsed="0.000259"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_key}">
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.705877" level="INFO">${account_data} = {'phoneNumber': '0000055', 'password': 'Phillip1'}</msg>
+<var>${account_data}</var>
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.705782" elapsed="0.000141"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.706101" level="INFO">${phone} = 0000055</msg>
+<var>${phone}</var>
+<arg>${account_data}</arg>
+<arg>phoneNumber</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.705985" elapsed="0.000169"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.706432" level="INFO">${password} = Phillip1</msg>
+<var>${password}</var>
+<arg>${account_data}</arg>
+<arg>password</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.706235" elapsed="0.000240"/>
+</kw>
+<return>
+<value>${phone}</value>
+<value>${password}</value>
+<status status="PASS" start="2025-08-03T22:51:11.706521" elapsed="0.000055"/>
+</return>
+<status status="PASS" start="2025-08-03T22:51:11.705699" elapsed="0.000917"/>
+</branch>
+<status status="PASS" start="2025-08-03T22:51:11.705686" elapsed="0.000965"/>
+</if>
+<var name="${item}">{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}</var>
+<status status="PASS" start="2025-08-03T22:51:11.705318" elapsed="0.001349"/>
+</iter>
+<var>${item}</var>
+<value>@{accounts}</value>
+<status status="PASS" start="2025-08-03T22:51:11.705190" elapsed="0.001513"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Account '${account_name}' not found in Account List</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-08-03T22:51:11.706765" elapsed="0.000039"/>
+</kw>
+<msg time="2025-08-03T22:51:11.706893" level="INFO">${phoneNumber} = 0000055</msg>
+<msg time="2025-08-03T22:51:11.707059" level="INFO">${password} = Phillip1</msg>
+<var>${phoneNumber}</var>
+<var>${password}</var>
+<arg>0000055</arg>
+<status status="PASS" start="2025-08-03T22:51:11.700375" elapsed="0.006716"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-08-03T22:51:11.707289" level="INFO">${phoneNumber} = 0000055</msg>
+<arg>${phoneNumber}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.707163" elapsed="0.000301"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-08-03T22:51:11.707680" level="INFO">${password} = Phillip1</msg>
+<arg>${password}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.707565" elapsed="0.000165"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:11.699947" elapsed="0.007831"/>
+</kw>
+<kw name="Open iOS simulator" owner="hooks">
+<kw name="Read iOS Config" owner="ReadJsonFile">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2025-08-03T22:51:11.708504" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;' exists.</msg>
+<arg>${Evn}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.708284" elapsed="0.000298"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-08-03T22:51:11.708922" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;'.</msg>
+<msg time="2025-08-03T22:51:11.709673" level="INFO">${json_text} = {
     "Android_Emulator": {
         "remote_url": "http://127.0.0.1:4723",
         "automationName": "UiAutomator2",
@@ -19,103 +145,273 @@
         "platformName": "Android",
         "...</msg>
 <var>${json_text}</var>
-<arg>${jsonFile}</arg>
+<arg>${Evn}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.434753" elapsed="0.001350"/>
+<status status="PASS" start="2025-08-03T22:51:11.708649" elapsed="0.001117"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-08-03T15:44:50.436974" level="INFO">${Android_evn} = {'Android_Emulator': {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.sau...</msg>
-<var>${Android_evn}</var>
+<msg time="2025-08-03T22:51:11.710513" level="INFO">${iOS_evn} = {'Android_Emulator': {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.sau...</msg>
+<var>${iOS_evn}</var>
 <arg>json.loads('''${json_text}''')</arg>
 <arg>json</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.436214" elapsed="0.000859"/>
+<status status="PASS" start="2025-08-03T22:51:11.709844" elapsed="0.000877"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.437409" level="INFO">${android} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.saucelabs.mydemoapp.rn',...</msg>
-<var>${android}</var>
-<arg>${Android_evn}</arg>
-<arg>Android_Emulator</arg>
+<msg time="2025-08-03T22:51:11.711106" level="INFO">${iOS} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'platformName': 'iOS', 'deviceName': 'iPhone 15 Pro Max', 'udid': '966C13C0-0DB0-4E8C-BE0E-24270641BD45', 'platformVersion': '17.5...</msg>
+<var>${iOS}</var>
+<arg>${iOS_evn}</arg>
+<arg>iOS_Emulator</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.437237" elapsed="0.000222"/>
+<status status="PASS" start="2025-08-03T22:51:11.710928" elapsed="0.000223"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.437641" level="INFO">${remote_url} = http://127.0.0.1:4723</msg>
+<msg time="2025-08-03T22:51:11.711467" level="INFO">${remote_url} = http://127.0.0.1:4723</msg>
 <var>${remote_url}</var>
-<arg>${android}</arg>
+<arg>${iOS}</arg>
 <arg>remote_url</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.437537" elapsed="0.000144"/>
+<status status="PASS" start="2025-08-03T22:51:11.711265" elapsed="0.000241"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.437838" level="INFO">${automationName} = UiAutomator2</msg>
+<msg time="2025-08-03T22:51:11.711658" level="INFO">${automationName} = XCUITest</msg>
 <var>${automationName}</var>
-<arg>${android}</arg>
+<arg>${iOS}</arg>
 <arg>automationName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.437745" elapsed="0.000127"/>
+<status status="PASS" start="2025-08-03T22:51:11.711566" elapsed="0.000130"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.438021" level="INFO">${deviceName} = emulator-5554</msg>
+<msg time="2025-08-03T22:51:11.711846" level="INFO">${deviceName} = iPhone 15 Pro Max</msg>
 <var>${deviceName}</var>
-<arg>${android}</arg>
+<arg>${iOS}</arg>
 <arg>deviceName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.437931" elapsed="0.000122"/>
+<status status="PASS" start="2025-08-03T22:51:11.711756" elapsed="0.000124"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.438191" level="INFO">${platformName} = Android</msg>
+<msg time="2025-08-03T22:51:11.712024" level="INFO">${platformName} = iOS</msg>
 <var>${platformName}</var>
-<arg>${android}</arg>
+<arg>${iOS}</arg>
 <arg>platformName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.438107" elapsed="0.000116"/>
+<status status="PASS" start="2025-08-03T22:51:11.711936" elapsed="0.000123"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.438357" level="INFO">${platformVersion} = 16</msg>
+<msg time="2025-08-03T22:51:11.712199" level="INFO">${platformVersion} = 17.5</msg>
 <var>${platformVersion}</var>
-<arg>${android}</arg>
+<arg>${iOS}</arg>
 <arg>platformVersion</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.438275" elapsed="0.000114"/>
+<status status="PASS" start="2025-08-03T22:51:11.712115" elapsed="0.000119"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.438519" level="INFO">${appPackage} = com.saucelabs.mydemoapp.rn</msg>
-<var>${appPackage}</var>
-<arg>${android}</arg>
-<arg>appPackage</arg>
+<msg time="2025-08-03T22:51:11.712371" level="INFO">${app} = com.phillip.tdt.poems.phk.uat</msg>
+<var>${app}</var>
+<arg>${iOS}</arg>
+<arg>app</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.438440" elapsed="0.000113"/>
+<status status="PASS" start="2025-08-03T22:51:11.712289" elapsed="0.000115"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:44:50.438686" level="INFO">${appActivity} = com.saucelabs.mydemoapp.rn.MainActivity</msg>
-<var>${appActivity}</var>
-<arg>${android}</arg>
-<arg>appActivity</arg>
+<msg time="2025-08-03T22:51:11.712541" level="INFO">${udid} = 966C13C0-0DB0-4E8C-BE0E-24270641BD45</msg>
+<var>${udid}</var>
+<arg>${iOS}</arg>
+<arg>udid</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:44:50.438605" elapsed="0.000112"/>
+<status status="PASS" start="2025-08-03T22:51:11.712459" elapsed="0.000116"/>
 </kw>
-<kw name="Open Application" owner="AppiumLibrary">
-<arg>${remote_url}</arg>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.712743" level="INFO">${noReset} = false</msg>
+<var>${noReset}</var>
+<arg>${iOS}</arg>
+<arg>noReset</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.712629" elapsed="0.000160"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-03T22:51:11.712967" level="INFO">${useNewWDA} = true</msg>
+<var>${useNewWDA}</var>
+<arg>${iOS}</arg>
+<arg>useNewWDA</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.712862" elapsed="0.000147"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-03T22:51:11.713440" level="INFO">${iOS_Desired_Capabilities} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid...</msg>
+<var>${iOS_Desired_Capabilities}</var>
+<arg>remote_url=${remote_url}</arg>
 <arg>automationName=${automationName}</arg>
 <arg>deviceName=${deviceName}</arg>
 <arg>platformName=${platformName}</arg>
 <arg>platformVersion=${platformVersion}</arg>
-<arg>appPackage=${appPackage}</arg>
-<arg>appActivity=${appActivity}</arg>
+<arg>app=${app}</arg>
+<arg>udid=${udid}</arg>
+<arg>noReset=${noReset}</arg>
+<arg>useNewWDA=${useNewWDA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.713126" elapsed="0.000363"/>
+</kw>
+<return>
+<value>${iOS_Desired_Capabilities}</value>
+<status status="PASS" start="2025-08-03T22:51:11.713536" elapsed="0.000041"/>
+</return>
+<msg time="2025-08-03T22:51:11.713653" level="INFO">${iOS_caps} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid...</msg>
+<var>${iOS_caps}</var>
+<doc>Reads and return all iOS Capabilities</doc>
+<status status="PASS" start="2025-08-03T22:51:11.708159" elapsed="0.005923"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-03T22:51:11.714732" level="INFO">{'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid': '966C13C0-0DB0-4E8C-BE0E-24270641BD45', 'noReset': 'false', 'useNewWDA': 'true'}</msg>
+<arg>${iOS_caps}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-03T22:51:11.714193" elapsed="0.000739"/>
+</kw>
+<kw name="Open Application" owner="AppiumLibrary">
+<arg>remote_url=${iOS_caps['remote_url']}</arg>
+<arg>automationName=${iOS_caps['automationName']}</arg>
+<arg>deviceName=${iOS_caps['deviceName']}</arg>
+<arg>platformName=${iOS_caps['platformName']}</arg>
+<arg>platformVersion=${iOS_caps['platformVersion']}</arg>
+<arg>app=${iOS_caps['app']}</arg>
+<arg>udid=${iOS_caps['udid']}</arg>
+<arg>noReset=${iOS_caps['noReset']}</arg>
+<arg>useNewWDA=${iOS_caps['useNewWDA']}</arg>
 <doc>Opens a new application to given Appium server.
 Capabilities of appium server, Android and iOS,
 Please check https://appium.io/docs/en/2.19/guides/caps/
 | *Option*            | *Man.* | *Description*     |
 | remote_url          | Yes    | Appium server url |
 | alias               | No     | alias             |</doc>
-<status status="PASS" start="2025-08-03T15:44:50.438770" elapsed="4.280509"/>
+<status status="PASS" start="2025-08-03T22:51:11.715090" elapsed="7.820850"/>
 </kw>
-<status status="PASS" start="2025-08-03T15:44:50.433351" elapsed="4.286406"/>
+<status status="PASS" start="2025-08-03T22:51:11.707935" elapsed="7.828282"/>
 </kw>
-<status status="PASS" start="2025-08-03T15:44:50.432955" elapsed="4.287046"/>
+<kw name="User select login option" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:19.539114" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="LOGIN"]'.</msg>
+<msg time="2025-08-03T22:51:20.685744" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="LOGIN"]</msg>
+<arg>${iOS_Signup_Login_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:19.536993" elapsed="1.149298"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:19.536610" elapsed="1.149928"/>
+</kw>
+<kw name="Check Phone Code" owner="LoginScreen">
+<kw name="Get Text" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:21.325163" level="INFO">Element '//XCUIElementTypeStaticText[@name="_CODE"]' text is '+852' </msg>
+<msg time="2025-08-03T22:51:21.325534" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="_CODE"]</msg>
+<msg time="2025-08-03T22:51:21.325879" level="INFO">${actual_code} = +852</msg>
+<var>${actual_code}</var>
+<arg>${iOS_phoneCode}</arg>
+<doc>Get element text (for hybrid and mobile browser use `xpath` locator, others might cause problem)</doc>
+<status status="PASS" start="2025-08-03T22:51:20.687931" elapsed="0.638141"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${actual_code}' != '+852'</arg>
+<arg>Change Phone Code</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-08-03T22:51:21.328952" elapsed="0.000559"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:20.687414" elapsed="0.642332"/>
+</kw>
+<kw name="User input phone number" owner="LoginScreen">
+<kw name="Input Text" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:21.333744" level="INFO">Typing text '0000055' into text field '//XCUIElementTypeTextField'</msg>
+<msg time="2025-08-03T22:51:22.417065" level="INFO">xpath criteria: //XCUIElementTypeTextField</msg>
+<arg>${iOS_PhoneNo_txtbox}</arg>
+<arg>${phoneNumber}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:21.331110" elapsed="1.086795"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:21.330540" elapsed="1.087885"/>
+</kw>
+<kw name="User input password" owner="LoginScreen">
+<kw name="Input Text" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:22.429110" level="INFO">Typing text 'Phillip1' into text field '//XCUIElementTypeSecureTextField'</msg>
+<msg time="2025-08-03T22:51:23.755414" level="INFO">xpath criteria: //XCUIElementTypeSecureTextField</msg>
+<arg>${iOS_Password_txtbox}</arg>
+<arg>${password}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:22.420707" elapsed="1.335549"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:22.419806" elapsed="1.336928"/>
+</kw>
+<kw name="User Agree to T&amp;C" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:23.761905" level="INFO">Clicking element '//XCUIElementTypeImage[@name="ic_checkbox"]'.</msg>
+<msg time="2025-08-03T22:51:24.295748" level="INFO">xpath criteria: //XCUIElementTypeImage[@name="ic_checkbox"]</msg>
+<arg>${iOS_TnC_checkbox}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:23.758698" elapsed="0.537681"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:23.757870" elapsed="0.538851"/>
+</kw>
+<kw name="User tap on login button" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:24.300684" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="LOGIN"]'.</msg>
+<msg time="2025-08-03T22:51:25.151576" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="LOGIN"]</msg>
+<arg>${iOS_Login_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:24.298096" elapsed="0.853754"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:24.297484" elapsed="0.854535"/>
+</kw>
+<kw name="User Close Notification Popup" owner="LoginScreen">
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:27.078828" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]</msg>
+<arg>${iOS_Cancel_Popup}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-08-03T22:51:25.152907" elapsed="1.926492"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:27.082844" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'.</msg>
+<msg time="2025-08-03T22:51:27.727073" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]</msg>
+<arg>${iOS_Cancel_Popup}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:27.079873" elapsed="0.647798"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:25.152479" elapsed="2.575600"/>
+</kw>
+<kw name="User Close Save Password Popup" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:27.734024" level="INFO">Clicking element '//XCUIElementTypeButton[@name="Not Now"]'.</msg>
+<msg time="2025-08-03T22:51:28.284343" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="Not Now"]</msg>
+<arg>${iOS_Cancel_Save_Password_PopUp}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:27.730249" elapsed="0.554422"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:27.729232" elapsed="0.555630"/>
+</kw>
+<kw name="User Close Ads" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:28.288590" level="INFO">Clicking element '//XCUIElementTypeButton[@name="ic cancel rounded"]'.</msg>
+<msg time="2025-08-03T22:51:29.442726" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="ic cancel rounded"]</msg>
+<arg>${iOS_Close_Ads}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-03T22:51:28.286207" elapsed="1.157367"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:28.285566" elapsed="1.158343"/>
+</kw>
+<kw name="User see Home Tab" owner="LoginScreen">
+<kw name="Element Should Be Visible" owner="AppiumLibrary">
+<msg time="2025-08-03T22:51:29.586692" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="Home"]</msg>
+<arg>${iOS_Home_Tab}</arg>
+<doc>Verifies that element identified with locator is visible.</doc>
+<status status="PASS" start="2025-08-03T22:51:29.445202" elapsed="0.141888"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:29.444448" elapsed="0.142898"/>
+</kw>
+<kw name="Close Application" owner="AppiumLibrary">
+<doc>Closes the current application and also close webdriver session.</doc>
+<status status="PASS" start="2025-08-03T22:51:29.587852" elapsed="1.134461"/>
+</kw>
+<status status="PASS" start="2025-08-03T22:51:11.699525" elapsed="19.023244"/>
 </test>
-<status status="PASS" start="2025-08-03T15:44:50.314633" elapsed="4.405836"/>
+<status status="PASS" start="2025-08-03T22:51:11.568668" elapsed="19.156330"/>
 </suite>
 <statistics>
 <total>
@@ -128,6 +424,5 @@ Please check https://appium.io/docs/en/2.19/guides/caps/
 </suite>
 </statistics>
 <errors>
-<msg time="2025-08-03T15:44:50.393335" level="ERROR">Error in file '/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/KeywordDefinationFiles/LoginScreen.robot' on line 4: Variable file '../../../Resources/PageObject/TestData/TestData.py' does not exist.</msg>
 </errors>
 </robot>
