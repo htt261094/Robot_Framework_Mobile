@@ -6,7 +6,5 @@ Resource    ../../Resources/hooksAndCommonAction/hooks.robot
 
 *** Test Cases ***
 Open app and verify app opened
-    User select login option
-    User input phone number
-    User input password
+    Open Android simulator
     
