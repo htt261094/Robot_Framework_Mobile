@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-03T15:39:30.980774" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-03T15:44:50.312879" rpa="false" schemaversion="5">
 <suite id="s1" name="Login" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/Android/Login.robot">
 <test id="s1-t1" name="Open app and verify app opened" line="8">
 <kw name="Open Android simulator" owner="hooks">
 <kw name="File Should Exist" owner="OperatingSystem">
-<msg time="2025-08-03T15:39:31.117610" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;' exists.</msg>
+<msg time="2025-08-03T15:44:50.433946" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;' exists.</msg>
 <arg>${jsonFile}</arg>
 <doc>Fails unless the given ``path`` points to an existing file.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.117382" elapsed="0.001683"/>
+<status status="PASS" start="2025-08-03T15:44:50.433753" elapsed="0.000697"/>
 </kw>
 <kw name="Get File" owner="OperatingSystem">
-<msg time="2025-08-03T15:39:31.119771" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;'.</msg>
-<msg time="2025-08-03T15:39:31.120028" level="INFO">${json_text} = {
-    "Android": {
+<msg time="2025-08-03T15:44:50.435348" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;'.</msg>
+<msg time="2025-08-03T15:44:50.436023" level="INFO">${json_text} = {
+    "Android_Emulator": {
         "remote_url": "http://127.0.0.1:4723",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5554",
         "platformName": "Android",
-        "platformV...</msg>
+        "...</msg>
 <var>${json_text}</var>
 <arg>${jsonFile}</arg>
 <doc>Returns the contents of a specified file.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.119546" elapsed="0.000547"/>
+<status status="PASS" start="2025-08-03T15:44:50.434753" elapsed="0.001350"/>
 </kw>
 <kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-08-03T15:39:31.120702" level="INFO">${Android_evn} = {'Android': {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.saucelabs.my...</msg>
+<msg time="2025-08-03T15:44:50.436974" level="INFO">${Android_evn} = {'Android_Emulator': {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.sau...</msg>
 <var>${Android_evn}</var>
 <arg>json.loads('''${json_text}''')</arg>
 <arg>json</arg>
 <doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.120465" elapsed="0.000290"/>
+<status status="PASS" start="2025-08-03T15:44:50.436214" elapsed="0.000859"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.120945" level="INFO">${android} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.saucelabs.mydemoapp.rn',...</msg>
+<msg time="2025-08-03T15:44:50.437409" level="INFO">${android} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.saucelabs.mydemoapp.rn',...</msg>
 <var>${android}</var>
 <arg>${Android_evn}</arg>
-<arg>Android</arg>
+<arg>Android_Emulator</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.120834" elapsed="0.000153"/>
+<status status="PASS" start="2025-08-03T15:44:50.437237" elapsed="0.000222"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121140" level="INFO">${remote_url} = http://127.0.0.1:4723</msg>
+<msg time="2025-08-03T15:44:50.437641" level="INFO">${remote_url} = http://127.0.0.1:4723</msg>
 <var>${remote_url}</var>
 <arg>${android}</arg>
 <arg>remote_url</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121050" elapsed="0.000130"/>
+<status status="PASS" start="2025-08-03T15:44:50.437537" elapsed="0.000144"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121327" level="INFO">${automationName} = UiAutomator2</msg>
+<msg time="2025-08-03T15:44:50.437838" level="INFO">${automationName} = UiAutomator2</msg>
 <var>${automationName}</var>
 <arg>${android}</arg>
 <arg>automationName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121238" elapsed="0.000122"/>
+<status status="PASS" start="2025-08-03T15:44:50.437745" elapsed="0.000127"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121498" level="INFO">${deviceName} = emulator-5554</msg>
+<msg time="2025-08-03T15:44:50.438021" level="INFO">${deviceName} = emulator-5554</msg>
 <var>${deviceName}</var>
 <arg>${android}</arg>
 <arg>deviceName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121415" elapsed="0.000114"/>
+<status status="PASS" start="2025-08-03T15:44:50.437931" elapsed="0.000122"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121655" level="INFO">${platformName} = Android</msg>
+<msg time="2025-08-03T15:44:50.438191" level="INFO">${platformName} = Android</msg>
 <var>${platformName}</var>
 <arg>${android}</arg>
 <arg>platformName</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121579" elapsed="0.000106"/>
+<status status="PASS" start="2025-08-03T15:44:50.438107" elapsed="0.000116"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121811" level="INFO">${platformVersion} = 16</msg>
+<msg time="2025-08-03T15:44:50.438357" level="INFO">${platformVersion} = 16</msg>
 <var>${platformVersion}</var>
 <arg>${android}</arg>
 <arg>platformVersion</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121734" elapsed="0.000106"/>
+<status status="PASS" start="2025-08-03T15:44:50.438275" elapsed="0.000114"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.121965" level="INFO">${appPackage} = com.saucelabs.mydemoapp.rn</msg>
+<msg time="2025-08-03T15:44:50.438519" level="INFO">${appPackage} = com.saucelabs.mydemoapp.rn</msg>
 <var>${appPackage}</var>
 <arg>${android}</arg>
 <arg>appPackage</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.121889" elapsed="0.000108"/>
+<status status="PASS" start="2025-08-03T15:44:50.438440" elapsed="0.000113"/>
 </kw>
 <kw name="Get From Dictionary" owner="Collections">
-<msg time="2025-08-03T15:39:31.122121" level="INFO">${appActivity} = com.saucelabs.mydemoapp.rn.MainActivity</msg>
+<msg time="2025-08-03T15:44:50.438686" level="INFO">${appActivity} = com.saucelabs.mydemoapp.rn.MainActivity</msg>
 <var>${appActivity}</var>
 <arg>${android}</arg>
 <arg>appActivity</arg>
 <doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
-<status status="PASS" start="2025-08-03T15:39:31.122045" elapsed="0.000108"/>
+<status status="PASS" start="2025-08-03T15:44:50.438605" elapsed="0.000112"/>
 </kw>
 <kw name="Open Application" owner="AppiumLibrary">
 <arg>${remote_url}</arg>
@@ -109,13 +109,13 @@ Please check https://appium.io/docs/en/2.19/guides/caps/
 | *Option*            | *Man.* | *Description*     |
 | remote_url          | Yes    | Appium server url |
 | alias               | No     | alias             |</doc>
-<status status="PASS" start="2025-08-03T15:39:31.122204" elapsed="4.210121"/>
+<status status="PASS" start="2025-08-03T15:44:50.438770" elapsed="4.280509"/>
 </kw>
-<status status="PASS" start="2025-08-03T15:39:31.116960" elapsed="4.215713"/>
+<status status="PASS" start="2025-08-03T15:44:50.433351" elapsed="4.286406"/>
 </kw>
-<status status="PASS" start="2025-08-03T15:39:31.116538" elapsed="4.216657"/>
+<status status="PASS" start="2025-08-03T15:44:50.432955" elapsed="4.287046"/>
 </test>
-<status status="PASS" start="2025-08-03T15:39:30.982743" elapsed="4.351286"/>
+<status status="PASS" start="2025-08-03T15:44:50.314633" elapsed="4.405836"/>
 </suite>
 <statistics>
 <total>
@@ -128,5 +128,6 @@ Please check https://appium.io/docs/en/2.19/guides/caps/
 </suite>
 </statistics>
 <errors>
+<msg time="2025-08-03T15:44:50.393335" level="ERROR">Error in file '/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/KeywordDefinationFiles/LoginScreen.robot' on line 4: Variable file '../../../Resources/PageObject/TestData/TestData.py' does not exist.</msg>
 </errors>
 </robot>

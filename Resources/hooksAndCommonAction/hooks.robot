@@ -12,7 +12,7 @@ Open Android simulator
     File Should Exist    ${jsonFile}
     ${json_text}=    Get File    ${jsonFile}
     ${Android_evn}=    Evaluate    json.loads('''${json_text}''')    json
-    ${android}=        Get From Dictionary    ${Android_evn}    Android
+    ${android}=        Get From Dictionary    ${Android_evn}    Android_Emulator
 
     ${remote_url}=         Get From Dictionary    ${android}    remote_url
     ${automationName}=     Get From Dictionary    ${android}    automationName

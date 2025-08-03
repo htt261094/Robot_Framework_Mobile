@@ -1,5 +1,5 @@
 {
-    "Android": {
+    "Android_Emulator": {
         "remote_url": "http://127.0.0.1:4723",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5554",
