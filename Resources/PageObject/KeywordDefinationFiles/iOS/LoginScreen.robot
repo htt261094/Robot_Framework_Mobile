@@ -8,7 +8,7 @@ Resource    ../../../../Resources/Ultis/ReadJsonFile.robot
 
 *** Keywords ***
 Load Login Credentials
-    ${phoneNumber}    ${password}=    Get Account Credentials    0000055
+    ${phoneNumber}    ${password}=    Get Account Credentials    000003
     Set Suite Variable    ${phoneNumber}
     Set Suite Variable    ${password}
 
