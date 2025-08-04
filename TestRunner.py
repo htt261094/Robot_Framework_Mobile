@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 from robot import run
 
 # Default: run all tests
@@ -20,6 +21,11 @@ OUTPUT_DIR = "results"
 LOG_NAME = "log.html"
 REPORT_NAME = "report.html"
 OUTPUT_NAME = "output.xml"
+
+#check if folder is empty or not
+if os.path.exists(OUTPUT_DIR):
+    shutil.rmtree(OUTPUT_DIR)
+os.makedirs(OUTPUT_DIR)
 
 # Run tests
 run(TEST_PATH,
