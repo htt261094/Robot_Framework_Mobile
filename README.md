@@ -5,8 +5,8 @@ A sample of robot framework when running automation testing on mobile and serve 
 ## Features
 
 - Login
-- Add item to cart
-- Confirm add item to cart successfully
+- Sort and Verify Sort
+- Open screen and Verify
 
 ## 🛠️ Tech Stack
 
@@ -18,3 +18,4 @@ Clone the repo:
 
 ```bash
 git clone https://github.com/htt261094/Robot_Framework_Mobile
+
