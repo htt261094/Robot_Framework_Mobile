@@ -5,8 +5,8 @@
         "deviceName": "emulator-5554",
         "platformName": "Android",
         "platformVersion": "16",
-        "appPackage": "com.saucelabs.mydemoapp.rn",
-        "appActivity": "com.saucelabs.mydemoapp.rn.MainActivity"
+        "appPackage": "com.tdt.pmobile3.phk.uat",
+        "appActivity": "com.tdt.pmobile3.SplashActivity"
     },
     "iOS_Emulator": {
         "remote_url": "http://127.0.0.1:4723",

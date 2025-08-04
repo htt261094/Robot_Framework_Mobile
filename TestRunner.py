@@ -26,4 +26,6 @@ run(TEST_PATH,
     outputdir=OUTPUT_DIR,
     log=LOG_NAME,
     report=REPORT_NAME,
-    output=OUTPUT_NAME)
+    output=OUTPUT_NAME,
+    loglevel='DEBUG',         # Full trace info
+    console='verbose')        # Show failures in terminal

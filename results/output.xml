@@ -1,186 +1,1478 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.13.5 on win32)" generated="2025-07-25T22:09:40.145250" rpa="false" schemaversion="5">
-<suite id="s1" name="Tests" source="C:\Users\tuant\Desktop\RobotFramework_Example\Tests">
-<suite id="s1-s1" name="Add Item To Cart" source="C:\Users\tuant\Desktop\RobotFramework_Example\Tests\Add_Item_To_Cart.robot">
-<test id="s1-s1-t1" name="Open app and verify app opened" line="10">
-<kw name="Open Application from simulator" owner="hooks">
-<kw name="Open Application" owner="AppiumLibrary">
-<arg>${remote_url}</arg>
+<robot generator="Robot 7.3.2 (Python 3.13.5 on darwin)" generated="2025-08-04T13:36:11.722665" rpa="false" schemaversion="5">
+<suite id="s1" name="iOS" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/iOS">
+<suite id="s1-s1" name="Login" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/iOS/Login.robot">
+<test id="s1-s1-t1" name="Open app and verify app opened" line="8">
+<kw name="Load Login Credentials" owner="LoginScreen">
+<kw name="Get Account Credentials" owner="ReadJsonFile">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2025-08-04T13:36:11.806240" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json&lt;/a&gt;' exists.</msg>
+<arg>${AccountList}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.806157" elapsed="0.000115"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-08-04T13:36:11.806387" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Account.json&lt;/a&gt;'.</msg>
+<msg time="2025-08-04T13:36:11.806457" level="INFO">${json_text} = {
+    "HK": {
+        "Register_Account": [
+            {
+                "0000055": {
+                    "phoneNumber": "0000055",
+                    "password": "Phillip1"
+                }
+      ...</msg>
+<var>${json_text}</var>
+<arg>${AccountList}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.806325" elapsed="0.000143"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.806628" level="INFO">${account_json} = {'HK': {'Register_Account': [{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}], 'Account_Holder': []}}</msg>
+<var>${account_json}</var>
+<arg>json.loads('''${json_text}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.806511" elapsed="0.000127"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.806903" level="INFO">${accounts} = [{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}]</msg>
+<var>${accounts}</var>
+<arg>${account_json['HK']}</arg>
+<arg>Register_Account</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.806677" elapsed="0.000236"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807108" elapsed="0.000059"/>
+</kw>
+<msg time="2025-08-04T13:36:11.807198" level="INFO">${has_key} = True</msg>
+<var>${has_key}</var>
+<arg>Dictionary Should Contain Key</arg>
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807058" elapsed="0.000149"/>
+</kw>
+<if>
+<branch type="IF" condition="${has_key}">
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.807352" level="INFO">${account_data} = {'phoneNumber': '0000055', 'password': 'Phillip1'}</msg>
+<var>${account_data}</var>
+<arg>${item}</arg>
+<arg>${account_name}</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807292" elapsed="0.000069"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.807444" level="INFO">${phone} = 0000055</msg>
+<var>${phone}</var>
+<arg>${account_data}</arg>
+<arg>phoneNumber</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807396" elapsed="0.000056"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.807533" level="INFO">${password} = Phillip1</msg>
+<var>${password}</var>
+<arg>${account_data}</arg>
+<arg>password</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807485" elapsed="0.000056"/>
+</kw>
+<return>
+<value>${phone}</value>
+<value>${password}</value>
+<status status="PASS" start="2025-08-04T13:36:11.807558" elapsed="0.000017"/>
+</return>
+<status status="PASS" start="2025-08-04T13:36:11.807240" elapsed="0.000350"/>
+</branch>
+<status status="PASS" start="2025-08-04T13:36:11.807230" elapsed="0.000370"/>
+</if>
+<var name="${item}">{'0000055': {'phoneNumber': '0000055', 'password': 'Phillip1'}}</var>
+<status status="PASS" start="2025-08-04T13:36:11.807019" elapsed="0.000593"/>
+</iter>
+<var>${item}</var>
+<value>@{accounts}</value>
+<status status="PASS" start="2025-08-04T13:36:11.806940" elapsed="0.000684"/>
+</for>
+<kw name="Fail" owner="BuiltIn">
+<arg>Account '${account_name}' not found in Account List</arg>
+<doc>Fails the test with the given message and optionally alters its tags.</doc>
+<status status="NOT RUN" start="2025-08-04T13:36:11.807658" elapsed="0.000006"/>
+</kw>
+<msg time="2025-08-04T13:36:11.807724" level="INFO">${phoneNumber} = 0000055</msg>
+<msg time="2025-08-04T13:36:11.807737" level="INFO">${password} = Phillip1</msg>
+<var>${phoneNumber}</var>
+<var>${password}</var>
+<arg>0000055</arg>
+<status status="PASS" start="2025-08-04T13:36:11.805854" elapsed="0.001890"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.807845" level="INFO">${phoneNumber} = 0000055</msg>
+<arg>${phoneNumber}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807784" elapsed="0.000074"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.807947" level="INFO">${password} = Phillip1</msg>
+<arg>${password}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.807894" elapsed="0.000064"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:11.805673" elapsed="0.002304"/>
+</kw>
+<kw name="Open iOS simulator" owner="hooks">
+<kw name="Read iOS Config" owner="ReadJsonFile">
+<kw name="File Should Exist" owner="OperatingSystem">
+<msg time="2025-08-04T13:36:11.808295" level="INFO" html="true">File '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;' exists.</msg>
+<arg>${Evn}</arg>
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808237" elapsed="0.000076"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2025-08-04T13:36:11.808395" level="INFO" html="true">Getting file '&lt;a href="file:///Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json"&gt;/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Resources/PageObject/TestData/Environment.json&lt;/a&gt;'.</msg>
+<msg time="2025-08-04T13:36:11.808453" level="INFO">${json_text} = {
+    "Android_Emulator": {
+        "remote_url": "http://127.0.0.1:4723",
+        "automationName": "UiAutomator2",
+        "deviceName": "emulator-5554",
+        "platformName": "Android",
+        "...</msg>
+<var>${json_text}</var>
+<arg>${Evn}</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808346" elapsed="0.000115"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.808628" level="INFO">${iOS_evn} = {'Android_Emulator': {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'UiAutomator2', 'deviceName': 'emulator-5554', 'platformName': 'Android', 'platformVersion': '16', 'appPackage': 'com.tdt...</msg>
+<var>${iOS_evn}</var>
+<arg>json.loads('''${json_text}''')</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808494" elapsed="0.000143"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.808865" level="INFO">${iOS} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'platformName': 'iOS', 'deviceName': 'iPhone 15 Pro Max', 'udid': '966C13C0-0DB0-4E8C-BE0E-24270641BD45', 'platformVersion': '17.5...</msg>
+<var>${iOS}</var>
+<arg>${iOS_evn}</arg>
+<arg>iOS_Emulator</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808673" elapsed="0.000202"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.808961" level="INFO">${remote_url} = http://127.0.0.1:4723</msg>
+<var>${remote_url}</var>
+<arg>${iOS}</arg>
+<arg>remote_url</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808911" elapsed="0.000058"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809052" level="INFO">${automationName} = XCUITest</msg>
+<var>${automationName}</var>
+<arg>${iOS}</arg>
+<arg>automationName</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809005" elapsed="0.000054"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809140" level="INFO">${deviceName} = iPhone 15 Pro Max</msg>
+<var>${deviceName}</var>
+<arg>${iOS}</arg>
+<arg>deviceName</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809093" elapsed="0.000054"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809224" level="INFO">${platformName} = iOS</msg>
+<var>${platformName}</var>
+<arg>${iOS}</arg>
+<arg>platformName</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809180" elapsed="0.000051"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809310" level="INFO">${platformVersion} = 17.5</msg>
+<var>${platformVersion}</var>
+<arg>${iOS}</arg>
+<arg>platformVersion</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809263" elapsed="0.000055"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809392" level="INFO">${app} = com.phillip.tdt.poems.phk.uat</msg>
+<var>${app}</var>
+<arg>${iOS}</arg>
+<arg>app</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809350" elapsed="0.000049"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809475" level="INFO">${udid} = 966C13C0-0DB0-4E8C-BE0E-24270641BD45</msg>
+<var>${udid}</var>
+<arg>${iOS}</arg>
+<arg>udid</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809430" elapsed="0.000052"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809558" level="INFO">${noReset} = false</msg>
+<var>${noReset}</var>
+<arg>${iOS}</arg>
+<arg>noReset</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809515" elapsed="0.000050"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-08-04T13:36:11.809645" level="INFO">${useNewWDA} = true</msg>
+<var>${useNewWDA}</var>
+<arg>${iOS}</arg>
+<arg>useNewWDA</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809597" elapsed="0.000057"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.809893" level="INFO">${iOS_Desired_Capabilities} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid...</msg>
+<var>${iOS_Desired_Capabilities}</var>
+<arg>remote_url=${remote_url}</arg>
 <arg>automationName=${automationName}</arg>
+<arg>deviceName=${deviceName}</arg>
 <arg>platformName=${platformName}</arg>
 <arg>platformVersion=${platformVersion}</arg>
-<arg>deviceName=${deviceName}</arg>
-<arg>appPackage=${appPackage}</arg>
-<arg>appActivity=${appActivity}</arg>
+<arg>app=${app}</arg>
+<arg>udid=${udid}</arg>
+<arg>noReset=${noReset}</arg>
+<arg>useNewWDA=${useNewWDA}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.809689" elapsed="0.000213"/>
+</kw>
+<return>
+<value>${iOS_Desired_Capabilities}</value>
+<status status="PASS" start="2025-08-04T13:36:11.809927" elapsed="0.000012"/>
+</return>
+<msg time="2025-08-04T13:36:11.809984" level="INFO">${iOS_caps} = {'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid...</msg>
+<var>${iOS_caps}</var>
+<doc>Reads and return all iOS Capabilities</doc>
+<status status="PASS" start="2025-08-04T13:36:11.808171" elapsed="0.001821"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-08-04T13:36:11.810070" level="INFO">{'remote_url': 'http://127.0.0.1:4723', 'automationName': 'XCUITest', 'deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'platformVersion': '17.5', 'app': 'com.phillip.tdt.poems.phk.uat', 'udid': '966C13C0-0DB0-4E8C-BE0E-24270641BD45', 'noReset': 'false', 'useNewWDA': 'true'}</msg>
+<arg>${iOS_caps}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-08-04T13:36:11.810027" elapsed="0.000058"/>
+</kw>
+<kw name="Open Application" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:11.811765" level="DEBUG">POST http://127.0.0.1:4723/session {'capabilities': {'firstMatch': [{}], 'alwaysMatch': {'appium:automationName': 'XCUITest', 'appium:deviceName': 'iPhone 15 Pro Max', 'platformName': 'iOS', 'appium:platformVersion': '17.5', 'appium:app': 'com.phillip.tdt.poems.phk.uat', 'appium:udid': '966C13C0-0DB0-4E8C-BE0E-24270641BD45', 'appium:noReset': 'false', 'appium:useNewWDA': 'true'}}}</msg>
+<msg time="2025-08-04T13:36:11.811965" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:19.512447" level="DEBUG">http://127.0.0.1:4723 "POST /session HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:19.512762" level="DEBUG">Remote response: status=200 | data={"value":{"capabilities":{"webStorageEnabled":false,"locationContextEnabled":false,"browserName":"","platform":"MAC","javascriptEnabled":true,"databaseEnabled":false,"takesScreenshot":true,"networkConnectionEnabled":false,"platformName":"iOS","automationName":"XCUITest","deviceName":"iPhone 15 Pro Max","platformVersion":"17.5","app":"com.phillip.tdt.poems.phk.uat","udid":"966C13C0-0DB0-4E8C-BE0E-24270641BD45","noReset":false,"useNewWDA":true},"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"}} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '499', 'ETag': 'W/"1f3-3EeTFxEOTropqieQmj2aplIed8w"', 'Date': 'Mon, 04 Aug 2025 06:36:19 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:19.512979" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:19.515963" level="DEBUG">Opened application with session id be400791-fb1d-4995-a31d-f2bf43424805</msg>
+<arg>remote_url=${iOS_caps['remote_url']}</arg>
+<arg>automationName=${iOS_caps['automationName']}</arg>
+<arg>deviceName=${iOS_caps['deviceName']}</arg>
+<arg>platformName=${iOS_caps['platformName']}</arg>
+<arg>platformVersion=${iOS_caps['platformVersion']}</arg>
+<arg>app=${iOS_caps['app']}</arg>
+<arg>udid=${iOS_caps['udid']}</arg>
+<arg>noReset=${iOS_caps['noReset']}</arg>
+<arg>useNewWDA=${iOS_caps['useNewWDA']}</arg>
 <doc>Opens a new application to given Appium server.
 Capabilities of appium server, Android and iOS,
-Please check https://appium.io/docs/en/2.1/cli/args/
+Please check https://appium.io/docs/en/2.19/guides/caps/
 | *Option*            | *Man.* | *Description*     |
 | remote_url          | Yes    | Appium server url |
-| alias               | no     | alias             |
-| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
-<status status="PASS" start="2025-07-25T22:09:40.274492" elapsed="4.169379"/>
+| alias               | No     | alias             |</doc>
+<status status="PASS" start="2025-08-04T13:36:11.810117" elapsed="7.706012"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:40.274102" elapsed="4.169903"/>
+<status status="PASS" start="2025-08-04T13:36:11.808057" elapsed="7.708175"/>
 </kw>
-<kw name="Verify App is opened" owner="HomeScreen">
-<kw name="Element Should Be Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:45.708420" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="android:id/content"]/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]</msg>
-<arg>${AppTitle}</arg>
-<doc>Verifies that element identified with locator is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:44.444562" elapsed="1.263923"/>
-</kw>
-<status status="PASS" start="2025-07-25T22:09:44.444304" elapsed="1.264240"/>
-</kw>
-<status status="PASS" start="2025-07-25T22:09:40.273488" elapsed="5.435265"/>
-</test>
-<test id="s1-s1-t2" name="Login to app" line="14">
-<kw name="Open left menu and tap Login" owner="HomeScreen">
+<kw name="User select login option" owner="LoginScreen">
 <kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:45.710371" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView'.</msg>
-<msg time="2025-07-25T22:09:47.286940" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="open menu"]/android.widget.ImageView</msg>
-<arg>${LeftMenu}</arg>
+<msg time="2025-08-04T13:36:19.518384" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="LOGIN"]'.</msg>
+<msg time="2025-08-04T13:36:19.518544" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="LOGIN"]'}</msg>
+<msg time="2025-08-04T13:36:19.519025" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:19.671055" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:19.671362" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"13000000-0000-0000-D575-000000000000","ELEMENT":"13000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-RcqNQKIxjzZkj2klHuDvFcpPgTg"', 'Date': 'Mon, 04 Aug 2025 06:36:19 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:19.671540" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:19.671936" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/13000000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:19.672565" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:20.313853" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/13000000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:20.314149" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:20 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:20.314314" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:20.314569" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="LOGIN"]</msg>
+<arg>${iOS_Signup_Login_btn}</arg>
 <doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:45.709455" elapsed="1.577545"/>
+<status status="PASS" start="2025-08-04T13:36:19.516705" elapsed="0.797978"/>
 </kw>
-<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:47.397269" level="INFO">xpath criteria: //android.widget.TextView[@text="Log In"]</msg>
-<arg>${Login}</arg>
-<doc>Waits until element specified with `locator` is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:47.287105" elapsed="0.110218"/>
+<status status="PASS" start="2025-08-04T13:36:19.516455" elapsed="0.798395"/>
 </kw>
-<kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:47.398207" level="INFO">Clicking element '//android.widget.TextView[@text="Log In"]'.</msg>
-<msg time="2025-07-25T22:09:47.541073" level="INFO">xpath criteria: //android.widget.TextView[@text="Log In"]</msg>
-<arg>${Login}</arg>
-<doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:47.397419" elapsed="0.143714"/>
+<kw name="Check Phone Code" owner="LoginScreen">
+<kw name="Get Text" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:20.316159" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="_CODE"]'}</msg>
+<msg time="2025-08-04T13:36:20.316663" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:20.938764" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:20.938917" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"28000000-0000-0000-D575-000000000000","ELEMENT":"28000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-gn1w06BVxt69UwK0jy06JAJzMBA"', 'Date': 'Mon, 04 Aug 2025 06:36:20 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:20.938990" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:20.939192" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/28000000-0000-0000-D575-000000000000/text {}</msg>
+<msg time="2025-08-04T13:36:20.939944" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:20.960196" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/28000000-0000-0000-D575-000000000000/text HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:20.960483" level="DEBUG">Remote response: status=200 | data={"value":"+852","sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '67', 'ETag': 'W/"43-ZuPpYXgQSI0FBqK9ZxoYg9S35zg"', 'Date': 'Mon, 04 Aug 2025 06:36:20 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:20.960641" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:20.963504" level="INFO">Element '//XCUIElementTypeStaticText[@name="_CODE"]' text is '+852' </msg>
+<msg time="2025-08-04T13:36:20.963576" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="_CODE"]</msg>
+<msg time="2025-08-04T13:36:20.963679" level="INFO">${actual_code} = +852</msg>
+<var>${actual_code}</var>
+<arg>${iOS_phoneCode}</arg>
+<doc>Get element text (for hybrid and mobile browser use `xpath` locator, others might cause problem)</doc>
+<status status="PASS" start="2025-08-04T13:36:20.315765" elapsed="0.647944"/>
 </kw>
-<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:48.994608" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Username input field"]</msg>
-<arg>${UserName_txtBox}</arg>
-<doc>Waits until element specified with `locator` is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:47.541236" elapsed="1.453442"/>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${actual_code}' != '+852'</arg>
+<arg>Change Phone Code</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-08-04T13:36:20.963944" elapsed="0.000277"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:45.709300" elapsed="3.285450"/>
+<status status="PASS" start="2025-08-04T13:36:20.315312" elapsed="0.648992"/>
 </kw>
-<kw name="Input Username to textbox" owner="HomeScreen">
+<kw name="User input phone number" owner="LoginScreen">
 <kw name="Input Text" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:48.996010" level="INFO">Typing text 'bob@example.com' into text field '//android.widget.EditText[@content-desc="Username input field"]'</msg>
-<msg time="2025-07-25T22:09:49.061028" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Username input field"]</msg>
-<arg>${UserName_txtBox}</arg>
-<arg>bob@example.com</arg>
+<msg time="2025-08-04T13:36:20.966810" level="INFO">Typing text '0000055' into text field '//XCUIElementTypeTextField'</msg>
+<msg time="2025-08-04T13:36:20.966939" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeTextField'}</msg>
+<msg time="2025-08-04T13:36:20.967302" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:21.030730" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:21.031022" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"2A000000-0000-0000-D575-000000000000","ELEMENT":"2A000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-nf8ToM704wVusV+eZ+8rYQ8caiA"', 'Date': 'Mon, 04 Aug 2025 06:36:21 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:21.031190" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:21.031593" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/2A000000-0000-0000-D575-000000000000/value {'text': '0000055', 'value': ['0', '0', '0', '0', '0', '5', '5']}</msg>
+<msg time="2025-08-04T13:36:21.032503" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:22.011942" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/2A000000-0000-0000-D575-000000000000/value HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:22.012276" level="DEBUG">Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '14', 'ETag': 'W/"e-9/1BuKMgFObM1mWJm+YjxtXJnUM"', 'Date': 'Mon, 04 Aug 2025 06:36:22 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:22.012620" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:22.012815" level="INFO">xpath criteria: //XCUIElementTypeTextField</msg>
+<arg>${iOS_PhoneNo_txtbox}</arg>
+<arg>${phoneNumber}</arg>
 <doc>Types the given `text` into text field identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:48.995197" elapsed="0.065908"/>
+<status status="PASS" start="2025-08-04T13:36:20.964801" elapsed="1.048109"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:48.995017" elapsed="0.066154"/>
+<status status="PASS" start="2025-08-04T13:36:20.964529" elapsed="1.048542"/>
 </kw>
-<kw name="Input Password to textbox" owner="HomeScreen">
-<kw name="Input Password" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:49.063105" level="INFO">Typing password into text field '//android.widget.EditText[@content-desc="Password input field"]'</msg>
-<msg time="2025-07-25T22:09:49.703514" level="INFO">xpath criteria: //android.widget.EditText[@content-desc="Password input field"]</msg>
-<arg>${Password_txtBox}</arg>
-<arg>10203040</arg>
-<doc>Types the given password into text field identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:49.061761" elapsed="0.641808"/>
+<kw name="User input password" owner="LoginScreen">
+<kw name="Input Text" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:22.015749" level="INFO">Typing text 'Phillip1' into text field '//XCUIElementTypeSecureTextField'</msg>
+<msg time="2025-08-04T13:36:22.015918" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeSecureTextField'}</msg>
+<msg time="2025-08-04T13:36:22.016334" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:22.147025" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:22.147195" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"2D000000-0000-0000-D575-000000000000","ELEMENT":"2D000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-XwZiE9FLKsvp0KxJcS/3E+dP2c0"', 'Date': 'Mon, 04 Aug 2025 06:36:22 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:22.147274" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:22.147492" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/2D000000-0000-0000-D575-000000000000/value {'text': 'Phillip1', 'value': ['P', 'h', 'i', 'l', 'l', 'i', 'p', '1']}</msg>
+<msg time="2025-08-04T13:36:22.147859" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:23.336295" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/2D000000-0000-0000-D575-000000000000/value HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:23.336787" level="DEBUG">Remote response: status=200 | data={"value":null} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '14', 'ETag': 'W/"e-9/1BuKMgFObM1mWJm+YjxtXJnUM"', 'Date': 'Mon, 04 Aug 2025 06:36:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:23.336986" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:23.337327" level="INFO">xpath criteria: //XCUIElementTypeSecureTextField</msg>
+<arg>${iOS_Password_txtbox}</arg>
+<arg>${password}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-08-04T13:36:22.013797" elapsed="1.323656"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:49.061520" elapsed="0.642102"/>
+<status status="PASS" start="2025-08-04T13:36:22.013379" elapsed="1.324259"/>
 </kw>
-<kw name="Tap Login Button" owner="HomeScreen">
+<kw name="User Agree to T&amp;C" owner="LoginScreen">
 <kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:49.705001" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="Login button"]'.</msg>
-<msg time="2025-07-25T22:09:50.342839" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="Login button"]</msg>
-<arg>${Login_btn}</arg>
+<msg time="2025-08-04T13:36:23.341067" level="INFO">Clicking element '//XCUIElementTypeImage[@name="ic_checkbox"]'.</msg>
+<msg time="2025-08-04T13:36:23.341316" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeImage[@name="ic_checkbox"]'}</msg>
+<msg time="2025-08-04T13:36:23.341912" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:23.494597" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:23.494913" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"2F000000-0000-0000-D575-000000000000","ELEMENT":"2F000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-d73B/0Av68j2ROhsmX/SlXOKVFc"', 'Date': 'Mon, 04 Aug 2025 06:36:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:23.495089" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:23.495430" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/2F000000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:23.496273" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:23.869152" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/2F000000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:23.869607" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:23 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:23.869804" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:23.870095" level="INFO">xpath criteria: //XCUIElementTypeImage[@name="ic_checkbox"]</msg>
+<arg>${iOS_TnC_checkbox}</arg>
 <doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:49.704052" elapsed="0.638859"/>
+<status status="PASS" start="2025-08-04T13:36:23.338698" elapsed="0.531498"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:49.703845" elapsed="0.639124"/>
+<status status="PASS" start="2025-08-04T13:36:23.338119" elapsed="0.532283"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:45.709050" elapsed="4.634129"/>
-</test>
-<test id="s1-s1-t3" name="Add product to cart" line="20">
-<kw name="Go to SauceLabs Packback detail screen" owner="HomeScreen">
+<kw name="User tap on login button" owner="LoginScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:23.873977" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="LOGIN"]'.</msg>
+<msg time="2025-08-04T13:36:23.874234" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="LOGIN"]'}</msg>
+<msg time="2025-08-04T13:36:23.874889" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:24.014366" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:24.014663" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"93000000-0000-0000-D575-000000000000","ELEMENT":"93000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-aUisILtPauPMABQosLBX5SvLG+c"', 'Date': 'Mon, 04 Aug 2025 06:36:24 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:24.014834" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:24.015284" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/93000000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:24.016246" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:24.715028" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/93000000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:24.715119" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:24 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:24.715156" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:24.715221" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="LOGIN"]</msg>
+<arg>${iOS_Login_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-04T13:36:23.871642" elapsed="0.843700"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:23.870958" elapsed="0.844448"/>
+</kw>
+<kw name="User Close Notification Popup" owner="LoginScreen">
 <kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:51.391212" level="INFO">xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView
-xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView</msg>
-<arg>xpath=${SauceLabsBackpack}</arg>
+<msg time="2025-08-04T13:36:24.716451" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:24.716883" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:24.814602" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:24.814952" level="DEBUG">Remote response: status=200 | data={"value":[]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '12', 'ETag': 'W/"c-ct3goOI+b+kRZv2R9j2fTtMXwkk"', 'Date': 'Mon, 04 Aug 2025 06:36:24 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:24.815068" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:25.016144" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:25.016954" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:25.557469" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:25.557721" level="DEBUG">Remote response: status=200 | data={"value":[]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '12', 'ETag': 'W/"c-ct3goOI+b+kRZv2R9j2fTtMXwkk"', 'Date': 'Mon, 04 Aug 2025 06:36:25 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:25.557918" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:25.758597" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:25.759244" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:26.093352" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:26.093559" level="DEBUG">Remote response: status=200 | data={"value":[]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '12', 'ETag': 'W/"c-ct3goOI+b+kRZv2R9j2fTtMXwkk"', 'Date': 'Mon, 04 Aug 2025 06:36:26 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:26.093661" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:26.299235" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:26.300011" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:26.412792" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:26.413045" level="DEBUG">Remote response: status=200 | data={"value":[]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '12', 'ETag': 'W/"c-ct3goOI+b+kRZv2R9j2fTtMXwkk"', 'Date': 'Mon, 04 Aug 2025 06:36:26 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:26.413158" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:26.614332" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:26.614756" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:26.946113" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:26.946260" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"10010000-0000-0000-D575-000000000000","ELEMENT":"10010000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-AkTM8XW27yukitUa362xf+F0F6k"', 'Date': 'Mon, 04 Aug 2025 06:36:26 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:26.946332" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:26.946509" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/10010000-0000-0000-D575-000000000000/displayed {}</msg>
+<msg time="2025-08-04T13:36:26.947056" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:26.990858" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/10010000-0000-0000-D575-000000000000/displayed HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:26.991145" level="DEBUG">Remote response: status=200 | data={"value":true,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-jKFjuJpPTWBM4faTKKnXZ5JNYbQ"', 'Date': 'Mon, 04 Aug 2025 06:36:26 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:26.991307" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:26.991547" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]
+xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]</msg>
+<arg>${iOS_Cancel_Popup}</arg>
 <doc>Waits until element specified with `locator` is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:50.343910" elapsed="1.047357"/>
+<status status="PASS" start="2025-08-04T13:36:24.716244" elapsed="2.275417"/>
 </kw>
 <kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:51.392198" level="INFO">Clicking element 'xpath=(//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView'.</msg>
-<msg time="2025-07-25T22:09:51.508224" level="INFO">xpath criteria: (//android.view.ViewGroup[@content-desc="store item"])[1]/android.view.ViewGroup[1]/android.widget.ImageView</msg>
-<arg>xpath=${SauceLabsBackpack}</arg>
+<msg time="2025-08-04T13:36:26.995623" level="INFO">Clicking element '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'.</msg>
+<msg time="2025-08-04T13:36:26.995739" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeStaticText[@name="BTN_CANCEL"]'}</msg>
+<msg time="2025-08-04T13:36:26.996120" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:27.153037" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:27.153348" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"10010000-0000-0000-D575-000000000000","ELEMENT":"10010000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-AkTM8XW27yukitUa362xf+F0F6k"', 'Date': 'Mon, 04 Aug 2025 06:36:27 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:27.153516" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:27.153852" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/10010000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:27.154625" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:27.641049" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/10010000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:27.641371" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:27 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:27.641553" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:27.641845" level="INFO">xpath criteria: //XCUIElementTypeStaticText[@name="BTN_CANCEL"]</msg>
+<arg>${iOS_Cancel_Popup}</arg>
 <doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:51.391363" elapsed="0.116916"/>
+<status status="PASS" start="2025-08-04T13:36:26.991978" elapsed="0.650018"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:50.343755" elapsed="1.164578"/>
+<status status="PASS" start="2025-08-04T13:36:24.715801" elapsed="2.926317"/>
 </kw>
-<kw name="Add item to cart" owner="ItemDetail">
-<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:52.514807" level="INFO">xpath criteria: //android.widget.TextView[@text="Add To Cart"]
-xpath criteria: //android.widget.TextView[@text="Add To Cart"]</msg>
-<arg>${AddToCart_btn}</arg>
-<doc>Waits until element specified with `locator` is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:51.508793" elapsed="1.006085"/>
-</kw>
+<kw name="User Close Save Password Popup" owner="LoginScreen">
 <kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:52.516500" level="INFO">Clicking element '//android.widget.TextView[@text="Add To Cart"]'.</msg>
-<msg time="2025-07-25T22:09:52.607582" level="INFO">xpath criteria: //android.widget.TextView[@text="Add To Cart"]</msg>
-<arg>${AddToCart_btn}</arg>
+<msg time="2025-08-04T13:36:27.644613" level="INFO">Clicking element '//XCUIElementTypeButton[@name="Not Now"]'.</msg>
+<msg time="2025-08-04T13:36:27.644823" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeButton[@name="Not Now"]'}</msg>
+<msg time="2025-08-04T13:36:27.645469" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:27.806503" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:27.806685" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"5C060000-0000-0000-335B-010000000000","ELEMENT":"5C060000-0000-0000-335B-010000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-MXVOYBqNdxThQ/ZOrb0L9uRlhsM"', 'Date': 'Mon, 04 Aug 2025 06:36:27 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:27.806778" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:27.806983" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/5C060000-0000-0000-335B-010000000000/click {}</msg>
+<msg time="2025-08-04T13:36:27.807423" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:28.181745" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/5C060000-0000-0000-335B-010000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:28.181969" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:28 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:28.182091" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:28.182264" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="Not Now"]</msg>
+<arg>${iOS_Cancel_Save_Password_PopUp}</arg>
 <doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:52.515126" elapsed="0.092518"/>
+<status status="PASS" start="2025-08-04T13:36:27.642864" elapsed="0.539484"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:51.508573" elapsed="1.099138"/>
+<status status="PASS" start="2025-08-04T13:36:27.642453" elapsed="0.540020"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:50.343518" elapsed="2.264438"/>
-</test>
-<test id="s1-s1-t4" name="Verify product is added to cart" line="24">
-<kw name="Click on cart" owner="CommonAction">
+<kw name="User Close Ads" owner="LoginScreen">
 <kw name="Click Element" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:52.609534" level="INFO">Clicking element '//android.view.ViewGroup[@content-desc="cart badge"]/android.widget.ImageView'.</msg>
-<msg time="2025-07-25T22:09:53.390879" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="cart badge"]/android.widget.ImageView</msg>
-<arg>${CartIcon}</arg>
+<msg time="2025-08-04T13:36:28.185256" level="INFO">Clicking element '//XCUIElementTypeButton[@name="ic cancel rounded"]'.</msg>
+<msg time="2025-08-04T13:36:28.185402" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeButton[@name="ic cancel rounded"]'}</msg>
+<msg time="2025-08-04T13:36:28.185786" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:28.344411" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:28.344704" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"E0000000-0000-0000-D575-000000000000","ELEMENT":"E0000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-Bbm7/YjKH1ew5E287bEofb2DU7I"', 'Date': 'Mon, 04 Aug 2025 06:36:28 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:28.344875" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:28.345225" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/E0000000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:28.346009" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:29.334783" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/E0000000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:29.335129" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:29 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:29.335271" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:29.335512" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="ic cancel rounded"]</msg>
+<arg>${iOS_Close_Ads}</arg>
 <doc>Click element identified by `locator`.</doc>
-<status status="PASS" start="2025-07-25T22:09:52.608694" elapsed="0.782246"/>
+<status status="PASS" start="2025-08-04T13:36:28.183247" elapsed="1.152432"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:52.608528" elapsed="0.782468"/>
+<status status="PASS" start="2025-08-04T13:36:28.182814" elapsed="1.153055"/>
 </kw>
-<kw name="Verify Items added to cart" owner="CartScreen">
-<kw name="Element Text Should Be" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:53.392496" level="INFO">Verifying element '//android.widget.TextView[@content-desc="product label"]' contains exactly text 'Sauce Labs Backpack'.</msg>
-<msg time="2025-07-25T22:09:53.999779" level="INFO">xpath criteria: //android.widget.TextView[@content-desc="product label"]</msg>
-<arg>${ProductName}</arg>
-<arg>Sauce Labs Backpack</arg>
-<doc>Verifies element identified by ``locator`` exactly contains text ``expected``.</doc>
-<status status="PASS" start="2025-07-25T22:09:53.391519" elapsed="0.608314"/>
-</kw>
-<status status="PASS" start="2025-07-25T22:09:53.391255" elapsed="0.608629"/>
-</kw>
-<kw name="Verify Checkout button is Visible" owner="CartScreen">
+<kw name="User see Home Tab" owner="LoginScreen">
 <kw name="Element Should Be Visible" owner="AppiumLibrary">
-<msg time="2025-07-25T22:09:54.067610" level="INFO">xpath criteria: //android.view.ViewGroup[@content-desc="Proceed To Checkout button"]</msg>
-<arg>${Checkout_btn}</arg>
+<msg time="2025-08-04T13:36:29.337796" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeButton[@name="Home"]'}</msg>
+<msg time="2025-08-04T13:36:29.338196" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:29.442656" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:29.442945" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"A9000000-0000-0000-D575-000000000000","ELEMENT":"A9000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-hLxjpqwfUvrW1xii9hVNYHzufWA"', 'Date': 'Mon, 04 Aug 2025 06:36:29 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:29.443112" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:29.443450" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/A9000000-0000-0000-D575-000000000000/displayed {}</msg>
+<msg time="2025-08-04T13:36:29.444206" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:29.471051" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/A9000000-0000-0000-D575-000000000000/displayed HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:29.471357" level="DEBUG">Remote response: status=200 | data={"value":true,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-jKFjuJpPTWBM4faTKKnXZ5JNYbQ"', 'Date': 'Mon, 04 Aug 2025 06:36:29 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:29.471522" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:29.471754" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="Home"]</msg>
+<arg>${iOS_Home_Tab}</arg>
 <doc>Verifies that element identified with locator is visible.</doc>
-<status status="PASS" start="2025-07-25T22:09:54.000330" elapsed="0.067337"/>
+<status status="PASS" start="2025-08-04T13:36:29.337033" elapsed="0.134920"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:54.000130" elapsed="0.067590"/>
+<status status="PASS" start="2025-08-04T13:36:29.336340" elapsed="0.135793"/>
 </kw>
-<status status="PASS" start="2025-07-25T22:09:52.608250" elapsed="1.459638"/>
+<status status="PASS" start="2025-08-04T13:36:11.805367" elapsed="17.667166"/>
 </test>
-<status status="PASS" start="2025-07-25T22:09:40.163660" elapsed="13.904648"/>
+<status status="PASS" start="2025-08-04T13:36:11.731854" elapsed="17.741202"/>
 </suite>
-<status status="PASS" start="2025-07-25T22:09:40.146285" elapsed="13.922507"/>
+<suite id="s1-s2" name="Verify sort name" source="/Users/thanhht/Documents/Work/Robot_Framework_Mobile/Tests/iOS/Verify_sort_name.robot">
+<test id="s1-s2-t1" name="User click on Name column and see list is sorted by name" line="6">
+<kw name="User tap on WatchList Tab" owner="WatchlistScreen">
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:29.487410" level="INFO">Clicking element '//XCUIElementTypeButton[@name="Watchlist"]'.</msg>
+<msg time="2025-08-04T13:36:29.487491" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeButton[@name="Watchlist"]'}</msg>
+<msg time="2025-08-04T13:36:29.487655" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:29.577110" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:29.577406" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"AA000000-0000-0000-D575-000000000000","ELEMENT":"AA000000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-3kzSYipAPzoSOgPUvt2Y6al6+Q8"', 'Date': 'Mon, 04 Aug 2025 06:36:29 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:29.577571" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:29.577907" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/AA000000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:29.578542" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:30.072374" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/AA000000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:30.072896" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:30 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:30.073111" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:30.073373" level="INFO">xpath criteria: //XCUIElementTypeButton[@name="Watchlist"]</msg>
+<arg>${watchlist_tab}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-04T13:36:29.486494" elapsed="0.586995"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:29.486186" elapsed="0.587462"/>
+</kw>
+<kw name="User tap on Name column" owner="WatchlistScreen">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-08-04T13:36:35.076604" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-08-04T13:36:30.074397" elapsed="5.002574"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:35.080582" level="INFO">Clicking element '//XCUIElementTypeApplication[@name="[UAT] PHILLIP HK"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeButton'.</msg>
+<msg time="2025-08-04T13:36:35.080921" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeApplication[@name="[UAT] PHILLIP HK"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther...'}</msg>
+<msg time="2025-08-04T13:36:35.081622" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:35.844267" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:35.844561" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"89020000-0000-0000-D575-000000000000","ELEMENT":"89020000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '139', 'ETag': 'W/"8b-6eR+hH1NmUpFCXzBHhzvwuvnfv8"', 'Date': 'Mon, 04 Aug 2025 06:36:35 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:35.844754" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:35.845093" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/89020000-0000-0000-D575-000000000000/click {}</msg>
+<msg time="2025-08-04T13:36:35.845874" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:36.344164" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/element/89020000-0000-0000-D575-000000000000/click HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:36.344398" level="DEBUG">Remote response: status=200 | data={"value":null,"sessionId":"be400791-fb1d-4995-a31d-f2bf43424805"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '65', 'ETag': 'W/"41-XYqQOmb9ZMkc+oSEsZvZa3PmSWg"', 'Date': 'Mon, 04 Aug 2025 06:36:36 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:36.344630" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:36.344825" level="INFO">xpath criteria: //XCUIElementTypeApplication[@name="[UAT] PHILLIP HK"]/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[4]/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeButton</msg>
+<arg>${name_column}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-08-04T13:36:35.077496" elapsed="1.267424"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:30.074014" elapsed="6.271041"/>
+</kw>
+<kw name="User see Name List is sorted" owner="WatchlistScreen">
+<kw name="Verify Name and Sort" owner="Sorting">
+<kw name="Get Webelements" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:36.346914" level="DEBUG">POST http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/elements {'using': 'xpath', 'value': '//XCUIElementTypeCell/XCUIElementTypeStaticText[1]'}</msg>
+<msg time="2025-08-04T13:36:36.347368" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.185886" level="DEBUG">http://127.0.0.1:4723 "POST /session/be400791-fb1d-4995-a31d-f2bf43424805/elements HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.186181" level="DEBUG">Remote response: status=200 | data={"value":[{"element-6066-11e4-a52e-4f735466cecf":"EB010000-0000-0000-D575-000000000000","ELEMENT":"EB010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"E3010000-0000-0000-D575-000000000000","ELEMENT":"E3010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"DB010000-0000-0000-D575-000000000000","ELEMENT":"DB010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"D3010000-0000-0000-D575-000000000000","ELEMENT":"D3010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"CB010000-0000-0000-D575-000000000000","ELEMENT":"CB010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"6B020000-0000-0000-D575-000000000000","ELEMENT":"6B020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"C3010000-0000-0000-D575-000000000000","ELEMENT":"C3010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"63020000-0000-0000-D575-000000000000","ELEMENT":"63020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"BB010000-0000-0000-D575-000000000000","ELEMENT":"BB010000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"5B020000-0000-0000-D575-000000000000","ELEMENT":"5B020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"53020000-0000-0000-D575-000000000000","ELEMENT":"53020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"BF020000-0000-0000-D575-000000000000","ELEMENT":"BF020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"C7020000-0000-0000-D575-000000000000","ELEMENT":"C7020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"CF020000-0000-0000-D575-000000000000","ELEMENT":"CF020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"D7020000-0000-0000-D575-000000000000","ELEMENT":"D7020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"DF020000-0000-0000-D575-000000000000","ELEMENT":"DF020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"E7020000-0000-0000-D575-000000000000","ELEMENT":"E7020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"EF020000-0000-0000-D575-000000000000","ELEMENT":"EF020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"F7020000-0000-0000-D575-000000000000","ELEMENT":"F7020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"FF020000-0000-0000-D575-000000000000","ELEMENT":"FF020000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"07030000-0000-0000-D575-000000000000","ELEMENT":"07030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"0F030000-0000-0000-D575-000000000000","ELEMENT":"0F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"17030000-0000-0000-D575-000000000000","ELEMENT":"17030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"1F030000-0000-0000-D575-000000000000","ELEMENT":"1F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"27030000-0000-0000-D575-000000000000","ELEMENT":"27030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"2F030000-0000-0000-D575-000000000000","ELEMENT":"2F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"37030000-0000-0000-D575-000000000000","ELEMENT":"37030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"3F030000-0000-0000-D575-000000000000","ELEMENT":"3F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"47030000-0000-0000-D575-000000000000","ELEMENT":"47030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"4F030000-0000-0000-D575-000000000000","ELEMENT":"4F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"57030000-0000-0000-D575-000000000000","ELEMENT":"57030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"5F030000-0000-0000-D575-000000000000","ELEMENT":"5F030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"67030000-0000-0000-D575-000000000000","ELEMENT":"67030000-0000-0000-D575-000000000000"},{"element-6066-11e4-a52e-4f735466cecf":"6F030000-0000-0000-D575-000000000000","ELEMENT":"6F030000-0000-0000-D575-000000000000"}]} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Vary': 'X-HTTP-Method-Override', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '4363', 'ETag': 'W/"110b-T9YuJOIx5wD8/+vshd4kaUhnORk"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.186489" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.186788" level="INFO">xpath criteria: //XCUIElementTypeCell/XCUIElementTypeStaticText[1]</msg>
+<msg time="2025-08-04T13:36:40.187151" level="INFO">@{elements} = [ &lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="EB010000-0000-0000-D575-000000000000")&gt; | &lt;appium.webdriver.webelement.WebElement (session="be400791...</msg>
+<var>@{elements}</var>
+<arg>//XCUIElementTypeCell/XCUIElementTypeStaticText[1]</arg>
+<doc>Returns list of [http://selenium-python.readthedocs.io/api.html#module-selenium.webdriver.remote.webelement|WebElement] objects matching ``locator``.</doc>
+<status status="PASS" start="2025-08-04T13:36:36.346525" elapsed="3.840693"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-08-04T13:36:40.187634" level="INFO">@{PriceList} = [ ]</msg>
+<var>@{PriceList}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.187446" elapsed="0.000217"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.188303" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/EB010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.188752" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.290362" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/EB010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.290650" level="DEBUG">Remote response: status=200 | data={"value":"202.3800"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '20', 'ETag': 'W/"14-aI8KHIMGZOdl6N9rghYeUttJerk"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.290959" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.293025" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="EB010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '202.3800' </msg>
+<msg time="2025-08-04T13:36:40.293183" level="INFO">${text} = 202.3800</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.188056" elapsed="0.105159"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.293412" elapsed="0.000220"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="EB010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.187955" elapsed="0.105723"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.294165" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/E3010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.294601" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.396491" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/E3010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.396671" level="DEBUG">Remote response: status=200 | data={"value":"195.2200"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '20', 'ETag': 'W/"14-ek+vvyHo+MMpZ4Bsbon3yAh9AB8"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.396765" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.398197" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="E3010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '195.2200' </msg>
+<msg time="2025-08-04T13:36:40.398319" level="INFO">${text} = 195.2200</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.293921" elapsed="0.104429"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.398550" elapsed="0.000215"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="E3010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.293824" elapsed="0.104988"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.399281" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/DB010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.399710" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.503384" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/DB010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.503677" level="DEBUG">Remote response: status=200 | data={"value":"113.5000"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '20', 'ETag': 'W/"14-YZGToPUPQDlrIbWupKTbRk6pNK0"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.503844" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.506064" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="DB010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '113.5000' </msg>
+<msg time="2025-08-04T13:36:40.506196" level="INFO">${text} = 113.5000</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.399045" elapsed="0.107184"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.506430" elapsed="0.000257"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="DB010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.398948" elapsed="0.107799"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.507233" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/D3010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.507668" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.609084" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/D3010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.609372" level="DEBUG">Remote response: status=200 | data={"value":"82.9000"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-LiLfEdSjxcqxegW97HcO1lwWans"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.609537" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.612255" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="D3010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '82.9000' </msg>
+<msg time="2025-08-04T13:36:40.612397" level="INFO">${text} = 82.9000</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.506987" elapsed="0.105435"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.612590" elapsed="0.000174"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="D3010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.506887" elapsed="0.105913"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.613182" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/CB010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.613536" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.713897" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/CB010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.714185" level="DEBUG">Remote response: status=200 | data={"value":"81.6500"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-SiXggwfRfyQn9z0hSI2SXyfXhoU"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.714492" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.717164" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="CB010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '81.6500' </msg>
+<msg time="2025-08-04T13:36:40.717377" level="INFO">${text} = 81.6500</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.612988" elapsed="0.104446"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.717751" elapsed="0.000379"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="CB010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.612911" elapsed="0.105308"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.718715" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/6B020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.719071" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.820229" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/6B020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.820517" level="DEBUG">Remote response: status=200 | data={"value":"81.6300"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-tblRNzER11/7i/1/hCrtfT6fe6Q"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.820694" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.822992" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="6B020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '81.6300' </msg>
+<msg time="2025-08-04T13:36:40.823122" level="INFO">${text} = 81.6300</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.718521" elapsed="0.104634"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.823353" elapsed="0.000216"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="6B020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.718441" elapsed="0.105175"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.824083" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/C3010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.824517" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:40.926032" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/C3010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:40.926317" level="DEBUG">Remote response: status=200 | data={"value":"77.3576"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-Oegwayxsk1/GPOitxvK3TjQg8OM"', 'Date': 'Mon, 04 Aug 2025 06:36:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:40.926479" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:40.929076" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="C3010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '77.3576' </msg>
+<msg time="2025-08-04T13:36:40.929185" level="INFO">${text} = 77.3576</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.823847" elapsed="0.105364"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:40.929377" elapsed="0.000175"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="C3010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.823750" elapsed="0.105838"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:40.929968" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/63020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:40.930333" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.030844" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/63020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.031135" level="DEBUG">Remote response: status=200 | data={"value":"52.7100"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-/AfUljX91jE8Yy8j4N9X6IMiwH4"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.031299" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.034102" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="63020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '52.7100' </msg>
+<msg time="2025-08-04T13:36:41.034328" level="INFO">${text} = 52.7100</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:40.929774" elapsed="0.104615"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.034710" elapsed="0.000407"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="63020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:40.929698" elapsed="0.105510"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.035701" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/BB010000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.036077" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.142210" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/BB010000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.142386" level="DEBUG">Remote response: status=200 | data={"value":"40.6200"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-dwcZRDkRdEV2SLTzWXKGpcjuus0"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.142550" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.144015" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="BB010000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '40.6200' </msg>
+<msg time="2025-08-04T13:36:41.144150" level="INFO">${text} = 40.6200</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.035483" elapsed="0.108699"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.144383" elapsed="0.000230"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="BB010000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.035390" elapsed="0.109366"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.145330" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/5B020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.145780" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.248399" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/5B020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.248686" level="DEBUG">Remote response: status=200 | data={"value":"33.1500"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-/db6u9ceN+/xO7OerqWEMPbiGQk"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.248851" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.251104" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="5B020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '33.1500' </msg>
+<msg time="2025-08-04T13:36:41.251231" level="INFO">${text} = 33.1500</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.145049" elapsed="0.106214"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.251459" elapsed="0.000212"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="5B020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.144929" elapsed="0.106789"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.252212" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/53020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.252644" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.354282" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/53020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.354566" level="DEBUG">Remote response: status=200 | data={"value":"28.4000"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-np+KWKkT5dnwo9BFNKgZHWWNfM4"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.354729" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.357120" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="53020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '28.4000' </msg>
+<msg time="2025-08-04T13:36:41.357278" level="INFO">${text} = 28.4000</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.251975" elapsed="0.105341"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.357503" elapsed="0.000201"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="53020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.251877" elapsed="0.105868"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.358180" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/BF020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.358583" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.460649" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/BF020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.460938" level="DEBUG">Remote response: status=200 | data={"value":"25.0300"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-wg5AxPZ3cg/z4Fbld7zrguxZq6A"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.461101" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.463018" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="BF020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '25.0300' </msg>
+<msg time="2025-08-04T13:36:41.463150" level="INFO">${text} = 25.0300</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.357956" elapsed="0.105225"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.463374" elapsed="0.000216"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="BF020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.357869" elapsed="0.105767"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.464106" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/C7020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.464530" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.566501" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/C7020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.566866" level="DEBUG">Remote response: status=200 | data={"value":"23.7500"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-JFPL6F6Xtk6xfRyCpnb8FQU74/U"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.567139" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.569459" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="C7020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '23.7500' </msg>
+<msg time="2025-08-04T13:36:41.569606" level="INFO">${text} = 23.7500</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.463868" elapsed="0.105772"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.569841" elapsed="0.000220"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="C7020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.463772" elapsed="0.106336"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.570603" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/CF020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.571039" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.673445" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/CF020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.673731" level="DEBUG">Remote response: status=200 | data={"value":"21.5300"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-NgVTui2AVFKt3XT0L4hordb5N70"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.673893" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.676230" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="CF020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '21.5300' </msg>
+<msg time="2025-08-04T13:36:41.676387" level="INFO">${text} = 21.5300</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.570361" elapsed="0.106058"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.676642" elapsed="0.000218"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="CF020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.570262" elapsed="0.106645"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.677390" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/D7020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.677822" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.780979" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/D7020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.781269" level="DEBUG">Remote response: status=200 | data={"value":"21.3800"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-QIrn7C6a/pQBFgXguiaer3ycRDA"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.781433" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.784032" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="D7020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '21.3800' </msg>
+<msg time="2025-08-04T13:36:41.784243" level="INFO">${text} = 21.3800</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.677143" elapsed="0.107157"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.784612" elapsed="0.000371"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="D7020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.677045" elapsed="0.108025"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.785901" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/DF020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.786689" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.887061" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/DF020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.887361" level="DEBUG">Remote response: status=200 | data={"value":"21.0900"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-UpQGvsRx1hwelF999tcq7vR5pM8"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.887527" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.889982" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="DF020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '21.0900' </msg>
+<msg time="2025-08-04T13:36:41.890101" level="INFO">${text} = 21.0900</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.785481" elapsed="0.104647"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.890306" elapsed="0.000195"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="DF020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.785305" elapsed="0.105236"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.890971" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/E7020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.891424" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:41.991658" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/E7020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:41.991994" level="DEBUG">Remote response: status=200 | data={"value":"19.3700"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-eAtqK2gKaUqEiwJk+EplERPK3WU"', 'Date': 'Mon, 04 Aug 2025 06:36:41 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:41.992278" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:41.994963" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="E7020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '19.3700' </msg>
+<msg time="2025-08-04T13:36:41.995096" level="INFO">${text} = 19.3700</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.890752" elapsed="0.104376"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:41.995322" elapsed="0.000219"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="E7020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.890666" elapsed="0.104921"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:41.996055" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/EF020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:41.996507" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.097862" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/EF020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.098152" level="DEBUG">Remote response: status=200 | data={"value":"18.7000"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-jIfYhtUYC2owySZQQ6fVVUaNOT0"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.098310" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.100405" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="EF020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '18.7000' </msg>
+<msg time="2025-08-04T13:36:42.100540" level="INFO">${text} = 18.7000</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:41.995820" elapsed="0.104751"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.100766" elapsed="0.000212"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="EF020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:41.995724" elapsed="0.105302"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.101496" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/F7020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.101929" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.203973" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/F7020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.204263" level="DEBUG">Remote response: status=200 | data={"value":"17.8400"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-lS7dsI0QOVZ+MOIK8jAmLKG3psI"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.204432" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.207140" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="F7020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '17.8400' </msg>
+<msg time="2025-08-04T13:36:42.207373" level="INFO">${text} = 17.8400</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.101258" elapsed="0.106175"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.207748" elapsed="0.000402"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="F7020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.101163" elapsed="0.107094"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.209137" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/FF020000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.209954" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.313616" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/FF020000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.313909" level="DEBUG">Remote response: status=200 | data={"value":"13.4100"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-AR6wP0XOJrFwb6Z62oVVc/ZfSlQ"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.314072" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.315817" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="FF020000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '13.4100' </msg>
+<msg time="2025-08-04T13:36:42.315950" level="INFO">${text} = 13.4100</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.208694" elapsed="0.107286"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.316175" elapsed="0.000221"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="FF020000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.208495" elapsed="0.107946"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.316907" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/07030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.317351" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.419131" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/07030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.419425" level="DEBUG">Remote response: status=200 | data={"value":"12.4000"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-LzPUQXAiwjw0myX323lDnPZ02rA"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.419675" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.422327" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="07030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '12.4000' </msg>
+<msg time="2025-08-04T13:36:42.422550" level="INFO">${text} = 12.4000</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.316672" elapsed="0.105937"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.422925" elapsed="0.000380"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="07030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.316575" elapsed="0.106898"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.424139" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/0F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.424580" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.531007" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/0F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.531379" level="DEBUG">Remote response: status=200 | data={"value":"11.4100"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-c+HSnz8HAjgH6W4viaBq8L2NA/Y"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.531600" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.533682" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="0F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '11.4100' </msg>
+<msg time="2025-08-04T13:36:42.533812" level="INFO">${text} = 11.4100</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.423814" elapsed="0.110029"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.534048" elapsed="0.000218"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="0F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.423681" elapsed="0.110633"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.534799" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/17030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.535241" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.638009" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/17030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.638295" level="DEBUG">Remote response: status=200 | data={"value":"11.0300"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-TxtSaE6QeHkYXgX7Dtl0iLYdk9k"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.638453" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.641123" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="17030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '11.0300' </msg>
+<msg time="2025-08-04T13:36:42.641338" level="INFO">${text} = 11.0300</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.534551" elapsed="0.106845"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.641710" elapsed="0.000370"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="17030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.534452" elapsed="0.107714"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.643005" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/1F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.643805" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.746066" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/1F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.746350" level="DEBUG">Remote response: status=200 | data={"value":"10.6525"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-qd9esS9rBx0H/DdYk8dyj2H1vqg"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.746513" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.749193" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="1F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '10.6525' </msg>
+<msg time="2025-08-04T13:36:42.749417" level="INFO">${text} = 10.6525</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.642580" elapsed="0.106896"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.749787" elapsed="0.000372"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="1F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.642402" elapsed="0.107809"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.750777" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/27030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.751235" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.853520" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/27030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.853805" level="DEBUG">Remote response: status=200 | data={"value":"10.2100"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-QW0LdnDQ0fQ93HIzXhMj+B8kqZs"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.854065" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.857005" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="27030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '10.2100' </msg>
+<msg time="2025-08-04T13:36:42.857148" level="INFO">${text} = 10.2100</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.750458" elapsed="0.106721"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.857374" elapsed="0.000219"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="27030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.750352" elapsed="0.107287"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.858119" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/2F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.859235" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:42.962031" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/2F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:42.962327" level="DEBUG">Remote response: status=200 | data={"value":"10.0900"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '19', 'ETag': 'W/"13-8YT1zVlfGlcoLX5PJzXhrnGKQWA"', 'Date': 'Mon, 04 Aug 2025 06:36:42 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:42.962572" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:42.965058" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="2F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '10.0900' </msg>
+<msg time="2025-08-04T13:36:42.965168" level="INFO">${text} = 10.0900</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.857873" elapsed="0.107320"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:42.965358" elapsed="0.000176"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="2F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.857777" elapsed="0.107793"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:42.965954" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/37030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:42.966339" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.068469" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/37030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.068755" level="DEBUG">Remote response: status=200 | data={"value":"4.1600"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-GTuMR1/PkUnA3r/kyYp3ZyamKts"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.068915" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.071574" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="37030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '4.1600' </msg>
+<msg time="2025-08-04T13:36:43.071802" level="INFO">${text} = 4.1600</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:42.965760" elapsed="0.106099"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.072165" elapsed="0.000365"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="37030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:42.965682" elapsed="0.106936"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.073442" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/3F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.074184" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.177438" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/3F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.177721" level="DEBUG">Remote response: status=200 | data={"value":"3.6300"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-JIRTktM6/JjJfxHhMyhCdbB440M"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.177880" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.180059" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="3F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '3.6300' </msg>
+<msg time="2025-08-04T13:36:43.180176" level="INFO">${text} = 3.6300</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.073027" elapsed="0.107176"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.180378" elapsed="0.000191"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="3F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.072850" elapsed="0.107759"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.181028" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/47030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.181411" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.283286" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/47030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.283575" level="DEBUG">Remote response: status=200 | data={"value":"3.1201"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-b/lqV4xLZHy8mW+k55qWPZ/nut4"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.283820" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.286715" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="47030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '3.1201' </msg>
+<msg time="2025-08-04T13:36:43.286937" level="INFO">${text} = 3.1201</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.180816" elapsed="0.106176"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.287190" elapsed="0.000214"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="47030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.180730" elapsed="0.106721"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.288015" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/4F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.288453" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.390160" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/4F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.390451" level="DEBUG">Remote response: status=200 | data={"value":"2.2458"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-22GxXGlm7ORB4BbyX4+Jpe4IIxM"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.390615" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.393229" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="4F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '2.2458' </msg>
+<msg time="2025-08-04T13:36:43.393441" level="INFO">${text} = 2.2458</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.287747" elapsed="0.105751"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.393811" elapsed="0.000372"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="4F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.287631" elapsed="0.106638"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.395104" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/57030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.395831" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.498226" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/57030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.498538" level="DEBUG">Remote response: status=200 | data={"value":"1.0800"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-XXXCXfgyoVdy2QvtOjNM9dNrmqw"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.498702" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.501349" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="57030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '1.0800' </msg>
+<msg time="2025-08-04T13:36:43.501570" level="INFO">${text} = 1.0800</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.394681" elapsed="0.106948"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.501949" elapsed="0.000384"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="57030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.394503" elapsed="0.107917"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.503254" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/5F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.504046" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.606934" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/5F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.607227" level="DEBUG">Remote response: status=200 | data={"value":"0.1450"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '18', 'ETag': 'W/"12-jkakYR/BEwEF+f8UeINBUd5vdkk"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.607392" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.609151" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="5F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '0.1450' </msg>
+<msg time="2025-08-04T13:36:43.609343" level="INFO">${text} = 0.1450</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.502830" elapsed="0.106555"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.609640" elapsed="0.000248"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="5F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.502652" elapsed="0.107289"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.610433" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/67030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.610891" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.712463" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/67030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.712800" level="DEBUG">Remote response: status=200 | data={"value":"-"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '13', 'ETag': 'W/"d-woM7cZuHQyEE7OJTSE/7qJtNTVg"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.712968" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.715291" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="67030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '-' </msg>
+<msg time="2025-08-04T13:36:43.715420" level="INFO">${text} = -</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.610182" elapsed="0.105269"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.715645" elapsed="0.000217"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="67030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.610082" elapsed="0.105825"/>
+</iter>
+<iter>
+<kw name="Get Element Attribute" owner="AppiumLibrary">
+<msg time="2025-08-04T13:36:43.716371" level="DEBUG">GET http://127.0.0.1:4723/session/be400791-fb1d-4995-a31d-f2bf43424805/element/6F030000-0000-0000-D575-000000000000/attribute/label {}</msg>
+<msg time="2025-08-04T13:36:43.716813" level="DEBUG">Starting new HTTP connection (1): 127.0.0.1:4723</msg>
+<msg time="2025-08-04T13:36:43.818668" level="DEBUG">http://127.0.0.1:4723 "GET /session/be400791-fb1d-4995-a31d-f2bf43424805/element/6F030000-0000-0000-D575-000000000000/attribute/label HTTP/1.1" 200 0</msg>
+<msg time="2025-08-04T13:36:43.818969" level="DEBUG">Remote response: status=200 | data={"value":"-"} | headers=HTTPHeaderDict({'X-Powered-By': 'Express', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '13', 'ETag': 'W/"d-woM7cZuHQyEE7OJTSE/7qJtNTVg"', 'Date': 'Mon, 04 Aug 2025 06:36:43 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=600'})</msg>
+<msg time="2025-08-04T13:36:43.819140" level="DEBUG">Finished Request</msg>
+<msg time="2025-08-04T13:36:43.820984" level="INFO">Element '&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="6F030000-0000-0000-D575-000000000000")&gt;' attribute 'label' value '-' </msg>
+<msg time="2025-08-04T13:36:43.821111" level="INFO">${text} = -</msg>
+<var>${text}</var>
+<arg>${el}</arg>
+<arg>label</arg>
+<doc>Get element attribute using given attribute: name, value,...</doc>
+<status status="PASS" start="2025-08-04T13:36:43.716136" elapsed="0.105006"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${PriceList}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.821335" elapsed="0.000240"/>
+</kw>
+<var name="${el}">&lt;appium.webdriver.webelement.WebElement (session="be400791-fb1d-4995-a31d-f2bf43424805", element="6F030000-0000-0000-D575-000000000000")&gt;</var>
+<status status="PASS" start="2025-08-04T13:36:43.716041" elapsed="0.105581"/>
+</iter>
+<var>${el}</var>
+<value>@{elements}</value>
+<status status="PASS" start="2025-08-04T13:36:40.187745" elapsed="3.633928"/>
+</for>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-08-04T13:36:43.822435" level="INFO">${sorted} = ['202.3800', '195.2200', '113.5000', '82.9000', '81.6500', '81.6300', '77.3576', '52.7100', '40.6200', '33.1500', '28.4000', '25.0300', '23.7500', '21.5300', '21.3800', '21.0900', '19.3700', '18.7000'...</msg>
+<var>${sorted}</var>
+<arg>sorted(${PriceList}, key=lambda x: float(x) if x.replace('.', '', 1).isdigit() else -1, reverse=True)</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.821822" elapsed="0.000646"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<msg time="2025-08-04T13:36:43.822770" level="DEBUG">Argument types are:
+&lt;class 'list'&gt;
+&lt;class 'list'&gt;</msg>
+<arg>${PriceList}</arg>
+<arg>${sorted}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-08-04T13:36:43.822595" elapsed="0.000235"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:36.346047" elapsed="7.476857"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:36.345404" elapsed="7.477555"/>
+</kw>
+<status status="PASS" start="2025-08-04T13:36:29.485694" elapsed="14.337451"/>
+</test>
+<status status="PASS" start="2025-08-04T13:36:29.473541" elapsed="14.349930"/>
+</suite>
+<status status="PASS" start="2025-08-04T13:36:11.723419" elapsed="32.100612"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0" skip="0">All Tests</stat>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="4" fail="0" skip="0">Tests</stat>
-<stat name="Add Item To Cart" id="s1-s1" pass="4" fail="0" skip="0">Tests.Add Item To Cart</stat>
+<stat name="iOS" id="s1" pass="2" fail="0" skip="0">iOS</stat>
+<stat name="Login" id="s1-s1" pass="1" fail="0" skip="0">iOS.Login</stat>
+<stat name="Verify sort name" id="s1-s2" pass="1" fail="0" skip="0">iOS.Verify sort name</stat>
 </suite>
 </statistics>
 <errors>

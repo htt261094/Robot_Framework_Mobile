@@ -18,4 +18,3 @@ Open app and verify app opened
     User Close Save Password Popup
     User Close Ads
     User see Home Tab
-    Close Application
