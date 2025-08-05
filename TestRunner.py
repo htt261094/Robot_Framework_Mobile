@@ -3,35 +3,70 @@ import os
 import shutil
 from robot import run
 
-# Default: run all tests
-platform = None
-if len(sys.argv) > 1:
-    platform = sys.argv[1].lower()
+def run_tests(platform, test_suite=None, test_cases=None, tags=None):
+    platform = platform.lower()
 
-if platform == "android":
-    TEST_PATH = os.path.join("Tests", "Android")
-elif platform == "ios":
-    TEST_PATH = os.path.join("Tests", "iOS")
-else:
-    print("Usage: python TestRunner.py [android|ios]")
-    sys.exit(1)
+    if platform not in ["android", "ios"]:
+        print("Usage:")
+        print("  python TestRunner.py [android|ios] [optional: suite.robot] [--test 'Test Case'] [--tag TagName]")
+        sys.exit(1)
 
-# Output settings
-OUTPUT_DIR = "results"
-LOG_NAME = "log.html"
-REPORT_NAME = "report.html"
-OUTPUT_NAME = "output.xml"
+    base_test_path = os.path.join("Tests", platform.capitalize())
 
-#check if folder is empty or not
-if os.path.exists(OUTPUT_DIR):
-    shutil.rmtree(OUTPUT_DIR)
-os.makedirs(OUTPUT_DIR)
+    # Suite path
+    if test_suite:
+        test_path = os.path.join(base_test_path, test_suite)
+        if not os.path.isfile(test_path):
+            print(f"Error: Test suite not found -> {test_path}")
+            sys.exit(1)
+    else:
+        test_path = base_test_path
 
-# Run tests
-run(TEST_PATH,
-    outputdir=OUTPUT_DIR,
-    log=LOG_NAME,
-    report=REPORT_NAME,
-    output=OUTPUT_NAME,
-    loglevel='DEBUG',         # Full trace info
-    console='verbose')        # Show failures in terminal
+    # Output settings
+    OUTPUT_DIR = "results"
+    LOG_NAME = "log.html"
+    REPORT_NAME = "report.html"
+    OUTPUT_NAME = "output.xml"
+
+    if os.path.exists(OUTPUT_DIR):
+        shutil.rmtree(OUTPUT_DIR)
+    os.makedirs(OUTPUT_DIR)
+
+    # Build arguments
+    robot_args = {
+        'outputdir': OUTPUT_DIR,
+        'log': LOG_NAME,
+        'report': REPORT_NAME,
+        'output': OUTPUT_NAME,
+        'loglevel': 'DEBUG',
+        'console': 'verbose'
+    }
+
+    if test_cases:
+        robot_args['test'] = test_cases
+    if tags:
+        robot_args['include'] = tags
+
+    # Run Robot Framework
+    run(test_path, **robot_args)
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Robot Framework Test Runner")
+
+    parser.add_argument("platform", choices=["android", "ios"], help="Target platform")
+    parser.add_argument("suite", nargs="?", help="Optional .robot test suite file")
+
+    parser.add_argument("--test", action="append", help="Test case name(s) to run")
+    parser.add_argument("--tag", action="append", help="Tag(s) to include")
+
+    args = parser.parse_args()
+
+    run_tests(
+        platform=args.platform,
+        test_suite=args.suite,
+        test_cases=args.test,
+        tags=args.tag
+    )

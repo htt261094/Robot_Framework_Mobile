@@ -6,6 +6,7 @@ Resource    ../../Resources/hooksAndCommonAction/hooks.robot
 
 *** Test Cases ***
 Open app and verify app opened
+    [Tags]    Mandatory
     Load Login Credentials
     Open iOS simulator
     User select login option

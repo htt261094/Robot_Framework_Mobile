@@ -12,5 +12,5 @@ Verify Name and Sort
         Append To List    ${PriceList}    ${text}
     END
 
-    ${sorted}=    Evaluate    sorted(${PriceList}, key=lambda x: float(x) if x.replace('.', '', 1).isdigit() else -1, reverse=True)
+    ${sorted}=    Evaluate    sorted(${PriceList}, key=lambda x: float(x.replace(',', '')) if x.replace(',', '').replace('.', '', 1).isdigit() else -1, reverse=True)
     Should Be Equal    ${PriceList}    ${sorted}
